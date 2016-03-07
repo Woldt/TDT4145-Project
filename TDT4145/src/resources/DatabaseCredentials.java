@@ -12,8 +12,6 @@ public class DatabaseCredentials {
 	private static final String PASS = "password";
 	
 	
-	
-	
 	public static String getJdbcDriver() {
 		return JDBC_DRIVER;
 	}
