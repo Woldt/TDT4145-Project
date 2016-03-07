@@ -3,6 +3,7 @@ package application;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -46,20 +47,23 @@ public class WorkoutController implements PropertyChangeListener {
 			return;
 		}
 		String propertyName = event.getPropertyName();
+		if(Workout.TITLE_PROPERTY.equals(propertyName)){
+			updateWorkoutTitleView();
+		}
 
 	}
 
 
-	// Start of CONTROLLER Code:
+// Start of CONTROLLER Code:
 	public void initialize(){
 		setModel(new Workout());
 		initFrom();
 		initDuration();
 		initWorkoutType();
-
-
 	}
 
+	
+// Initialization methods:
 	private void initFrom() {
 		for(int i = 7; i < 24; i++){
 			if(i < 10 ? hourField.getItems().add("0"+i) : hourField.getItems().add(String.valueOf(i)));
@@ -81,6 +85,47 @@ public class WorkoutController implements PropertyChangeListener {
 		typeField.getItems().addAll("Uteaktivitet","Inneaktivitet");
 	}
 
+//	View-listeners:
+	@FXML
+	void titleFieldChange(ObservableValue<? extends String> property, String oldTitle, String newTitle){
+		validateTitleView(newTitle);
+	}
+	private void validateTitleView(String newTitle) {
+		if(newTitle.matches("[A-Za-z ]+")){
+		}
+		else{
+			//Do something with the fact that the workout title is invalid
+			//throw new IllegalStateException("Not valid workout title");
+			System.out.println("NOT VALID workoutTitle");
+		}
+	}
+	
+	@FXML
+	void titleFieldFocusChange(ObservableValue<? extends Boolean> property, Boolean oldString, Boolean newString){
+		if(!newString){
+			try {
+				updateWorkoutTitleModel();
+			} catch (Exception e){
+				System.out.println("FEIL her: " + e);
+				
+			}
+		}
+	}
+	
+	
+	
+// Model-updaters:
+	private void updateWorkoutTitleModel(){
+		this.workout.setWorkoutTitle(workoutField.getText());
+	}
+	
+// View-updaters:
+	private void updateWorkoutTitleView() {
+		workoutField.setText(workout.getWorkoutTitle());
+	}
 
+	
+	
+	
 
 }
