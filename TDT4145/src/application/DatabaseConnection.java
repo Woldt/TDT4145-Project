@@ -54,12 +54,14 @@ public class DatabaseConnection {
 		try {
 			while(rs.next()){
 				//Retrieve by column name
-				int id  = rs.getInt("id");
-				int age = rs.getInt("age");
-				String first = rs.getString("first");
-				String last = rs.getString("last");
-
-				//Display values
+			/*
+			 	to retrieve int use rs.getInt("attributeName")
+				to retrieve String use rs.getString("attributeName")
+				to retrieve Time use rs.getTime(columnIndex or "attributeName")
+			 */				
+				
+				
+				//Display or do something with values
 
 			}
 		} catch (SQLException e) {
