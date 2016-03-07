@@ -1,22 +1,32 @@
 package application;
 
 import java.sql.*;
+import resources.DatabaseCredentials;
+/**
+ * @author SigveAndreEvensen
+ * Class for connecting to MySQL using JDBC.
+ */
 
 public class DatabaseConnection {
 
 	// JDBC driver name and database URL
-	static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";  
-	static final String DB_URL = "jdbc:mysql://mysql.stud.ntnu.no/martsti_tdt4145";  /*  jdbc:mysql://host:port/database  */
+	static final String JDBC_DRIVER = DatabaseCredentials.getJdbcDriver();  
+	static final String DB_URL = DatabaseCredentials.getDbUrl();
 
 	//  Database credentials
-	static final String USER = "username";
-	static final String PASS = "password";
+	static final String USER = DatabaseCredentials.getUser();
+	static final String PASS = DatabaseCredentials.getPass();
 
 	private Connection conn = null;
 	private Statement stmt = null;
 	
 	private ResultSet rs;
 
+	/**
+	 * Establishes connection to MySQL database using JDBC
+	 * Class.forName register JDBC Driver
+	 * conn tries to establish the physical connection
+	 */
 	private void establishConnection(){	
 		try{
 			//STEP 2: Register JDBC driver
@@ -36,6 +46,11 @@ public class DatabaseConnection {
 		}
 	}
 	
+	/**
+	 * Method to execute SQL-query statement. 
+	 * Prints SQLEceptions if thrown.
+	 * @param query Complete SQL-query statement.
+	 */
 	private void executeQuery(String query){
 		//STEP 4: Execute a query
 		System.out.println("Creating statement...");
@@ -43,12 +58,14 @@ public class DatabaseConnection {
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(query);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e);;
 		}
 		
 	}
 	
+	/**
+	 * Method to handle the resultTabel generated from executeQuery(String query)
+	 */
 	private void resultToString(){
 		//STEP 5: Extract data from result set
 		try {
@@ -71,6 +88,10 @@ public class DatabaseConnection {
 
 	}
 	
+	/**
+	 * Terminates the established connection
+	 * Closes stmt, and conn.
+	 */
 	private void terminateConnection(){
 		//STEP 6: Clean-up environment
 		try{
