@@ -14,7 +14,7 @@ public class WorkoutController implements PropertyChangeListener {
 
 	private Workout workout;
 
-	@FXML private TextField workoutID;
+	@FXML private TextField workoutField;
 	@FXML private DatePicker dateField;
 	@FXML private ComboBox<String> typeField; 
 	@FXML private ComboBox<String> minuteField; 
