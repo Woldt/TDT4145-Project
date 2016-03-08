@@ -5,10 +5,13 @@ import java.beans.PropertyChangeSupport;
 
 public class Workout {
 	
-	private String workoutTitle;
+	private static String workoutTitle;
+	private static String workoutType;
+	
 	
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	public static String TITLE_PROPERTY = "title";
+	public static final String TYPE_PROPERTY = "type";
 
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -21,7 +24,7 @@ public class Workout {
 
 	public void setWorkoutTitle(String workoutTitle) {
 		String oldValue = "";
-		if(! workoutTitle.matches("[a-zA-z]")){
+		if(!workoutTitle.matches("[a-zA-Z ]+")){
 			throw new IllegalStateException("Not valid workoutTitle");
 		}
 		else if(workoutTitle.isEmpty()){
@@ -36,8 +39,31 @@ public class Workout {
 		}
 	}
 
-	public String getWorkoutTitle() {
-		return this.workoutTitle;
+	public static String getWorkoutTitle() {
+		return workoutTitle;
+	}
+	
+	
+	public void setWorkoutType(String workoutType){
+		String oldValue ="";
+		if(workoutType.equals("Inside")){
+			oldValue = Workout.workoutType;
+			Workout.workoutType = workoutType;
+			pcs.firePropertyChange(TYPE_PROPERTY,oldValue,workoutType);
+		}
+		else if(workoutType.equals("Outside")){ 
+			oldValue = Workout.workoutType;
+			Workout.workoutType = workoutType;
+			pcs.firePropertyChange(TYPE_PROPERTY,oldValue,workoutType);
+		}
+		else if(workoutType == null){
+			//do something crazy
+		}
+	}
+	
+	
+	public static String getWorkoutType(){
+		return workoutType;
 	}
 
 }
