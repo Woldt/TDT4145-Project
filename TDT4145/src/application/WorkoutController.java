@@ -206,6 +206,11 @@ public class WorkoutController implements PropertyChangeListener {
 			//DO all the validations that needs to be done before new scene. if not already done.
 			/* Validate workoutType */
 			this.workout.setWorkoutType(typeField.getValue());
+			/* Validate and set start time*/
+			/* Validate and set duration*/
+			/* Validate and set peronalFitness*/
+			/* Validate and set accomplishment*/
+			/* Validate and set personal note*/
 			scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 			Main.primaryStage.setScene(new Scene(scene));
 		} catch (IOException e) {
