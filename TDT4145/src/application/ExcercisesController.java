@@ -25,7 +25,7 @@ public class ExcercisesController {
 	@FXML Button moreBtn;
 	@FXML Button addBtn;
 	
-	private void initialization(){
+	public void initialization(){
 //		initWorkoutName();
 		initType();
 		initTypeSpecifics();
