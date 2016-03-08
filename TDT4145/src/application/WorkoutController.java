@@ -275,9 +275,12 @@ public class WorkoutController implements PropertyChangeListener {
 				this.workout.setWorkoutAccomplishment(accomplishmentField.getValue());
 			}
 	/* Validate and set personal note*/
+			System.out.println("her er note:"+personalNoteField.getText());
 			this.workout.setWorkoutNote(personalNoteField.getText());
 			
 	/*Make new scene, and then set the scene*/
+			//check what the modell looks like:
+			System.out.println(this.workout.toString());
 			scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 			Main.primaryStage.setScene(new Scene(scene));
 		} catch (IOException e) {

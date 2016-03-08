@@ -123,13 +123,14 @@ public class Workout {
 	}
 
 	public void setWorkoutNote(String text) {
-		if(!(text.length() <= 255)){
-			
-		}
-		else {
+		System.out.println(text);
+		if(text.length() <=255 && !text.isEmpty()){
 			String oldNote = this.workoutNote;
 			this.workoutNote = text;
 			pcs.firePropertyChange(NOTE_PROPERTY, oldNote, this.workoutNote);
+		}
+		else {
+			this.workoutNote = "NULL";
 		}
 	}
 
@@ -159,6 +160,7 @@ public class Workout {
 		return minutes;
 	}
 
+
 	public int getPersonalFitness() {
 		return personalFitness;
 	}
@@ -173,4 +175,10 @@ public class Workout {
 	
 	
 
+	@Override
+	public String toString() {
+		return "Workout [workoutDate=" + workoutDate + ", workoutDuration=" + workoutDuration + ", personalFitness="
+				+ personalFitness + ", workoutAccomplishment=" + workoutAccomplishment + ", workoutNote=" + workoutNote
+				+ ", pcs=" + pcs + "]";
+	}
 }
