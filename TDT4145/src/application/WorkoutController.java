@@ -234,11 +234,14 @@ public class WorkoutController implements PropertyChangeListener {
 	private void createBtnClicked(){
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		Parent scene;
+		Boolean state = true;
+		String message ="";
 		try {
 			//DO all the validations that needs to be done before new scene. if not already done.  Remember comboboxes default value is null
 			/* Validate workoutType */
 			if(typeField.getValue() == null){
-				//do some logic shit here
+				state = false;
+				message += "Workout type not set\n";
 			}
 			else{
 				this.workout.setWorkoutType(typeField.getValue());
@@ -246,7 +249,8 @@ public class WorkoutController implements PropertyChangeListener {
 			
 	/* Validate and set start date*/
 			if(dateField.getValue() == null){
-				//do some logic shit here
+				state = false;
+				message += "Workout date not set\n";
 			}
 			else {
 				this.workout.setDate(dateField.getValue());
@@ -254,21 +258,26 @@ public class WorkoutController implements PropertyChangeListener {
 	/* Validate and set start time (hour, min)*/
 	/* Validate and set duration*/
 			if(durationField.getValue() == null){
-				//do some logic shit here
+				state = false;
+				message += "Workout duration not set\n";
 			}
 			else {
 				this.workout.setDuration(durationField.getValue());
 			}
 	/* Validate and set peronalFitness*/
 			if(fitnessField.getValue()== null){
-				//do some logic shit here
+				//do some logic shit here, so that the modell dosent get set without a value
+				//don't let the button change scene before all values/ attributs are set!
+				state = false;
+				message += "Workout fitness not set\n";
 			}
 			else {
 				this.workout.setPersonalFitness(fitnessField.getValue());
 			}
 	/* Validate and set accomplishment*/
 			if(accomplishmentField.getValue()== null){
-				
+				state = false;
+				message += "Workout accomplishment not set\n";
 			}
 			else {
 				//update model, with view values. REMEMBER TO ADD pcs.firePropertyChange in workout, and handling that event here under pcs connection  
@@ -279,10 +288,14 @@ public class WorkoutController implements PropertyChangeListener {
 			this.workout.setWorkoutNote(personalNoteField.getText());
 			
 	/*Make new scene, and then set the scene*/
-			//check what the modell looks like:
-			System.out.println(this.workout.toString());
-			scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
-			Main.primaryStage.setScene(new Scene(scene));
+			if(state){
+				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
+				Main.primaryStage.setScene(new Scene(scene));
+			}
+			else {
+				message += "These needs to set, before new workout is valid";
+				Alertbox.display(message);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
