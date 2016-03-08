@@ -3,6 +3,7 @@ package application;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -14,6 +15,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.event.ActionEvent;
 
 public class WorkoutController implements PropertyChangeListener {
 
@@ -54,14 +56,17 @@ public class WorkoutController implements PropertyChangeListener {
 		if(Workout.TITLE_PROPERTY.equals(propertyName)){
 			updateWorkoutTitleView();
 		}
-		if(Workout.TYPE_PROPERTY.equals(propertyName)){
+		else if(Workout.TYPE_PROPERTY.equals(propertyName)){
 			updateWorkoutTypeView();
+		}
+		else if(Workout.DATE_PROPERTY.equals(propertyName)){
+			updateWorkoutDateView();
 		}
 
 	}
 
 
-// Start of CONTROLLER Code:
+	// Start of CONTROLLER Code:
 	public void initialize(){
 		setModel(new Workout());
 		initFrom();
@@ -135,22 +140,63 @@ public class WorkoutController implements PropertyChangeListener {
 		}
 	}
 	
+	@FXML
+	public void dateFieldChange() {
+		validateDateView();
+	}
+	
+	public void validateDateView(){
+		LocalDate today = LocalDate.now();
+		LocalDate choosen = dateField.getValue();
+		if(!choosen.isAfter(today) && !choosen.equals(today)){
+			//make some changes in the view, to notify user that not valid date.
+			System.out.println("wrong workout date");
+		}
+		
+	}
+
+	@FXML
+	public void dateFieldFocusChange(ObservableValue<? extends Boolean> property, Boolean oldStartDate, Boolean newStartDate){
+		System.out.println("focus");
+		if(!newStartDate){
+			System.out.println("focus1");
+			try{
+				updateDateModel();
+			} catch(Exception e){
+				System.err.println(e);
+			}
+		}
+	}
 	
 	
+
+
 // Model-updaters:
 	private void updateWorkoutTitleModel(){
 		this.workout.setWorkoutTitle(workoutField.getText());
 	}
+
+	private void updateDateModel() {
+		this.workout.setDate(dateField.getValue());
+	}
+	
+	
 	
 // View-updaters:
 	private void updateWorkoutTitleView() {
-		workoutField.setText(workout.getWorkoutTitle());
+		workoutField.setText(Workout.getWorkoutTitle());
 	}
 	
 
 	private void updateWorkoutTypeView() {
 		typeField.setValue(Workout.getWorkoutType());
 	}
+	
+
+	private void updateWorkoutDateView() {
+		dateField.setValue(workout.getWorkoutDate());
+	}
+
 
 	
 //Scene handler:
@@ -169,6 +215,5 @@ public class WorkoutController implements PropertyChangeListener {
 			e.printStackTrace();
 		}
 	}
-	
 
 }
