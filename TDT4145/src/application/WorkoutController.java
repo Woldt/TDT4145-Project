@@ -24,7 +24,7 @@ public class WorkoutController implements PropertyChangeListener {
 	@FXML private ComboBox<Integer> feelingField; 
 	@FXML private ComboBox<Integer> accomplishmentField; 
 	@FXML private TextArea personalNoteField; 
-	@FXML private Button createBtn;
+	@FXML private Button createBtn; //In the eventHandler, need to send workoutField value to ExcercisesController.init
 	@FXML private Button cancelBtn;
 	@FXML private Button resetBtn;
 
