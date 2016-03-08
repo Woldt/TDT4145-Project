@@ -21,8 +21,8 @@ public class WorkoutController implements PropertyChangeListener {
 	@FXML private ComboBox<String> minuteField; 
 	@FXML private ComboBox<String> hourField; 
 	@FXML private ComboBox<String> durationField; 
-	@FXML private ComboBox<String> feelingField; 
-	@FXML private ComboBox<String> accomplishmentField; 
+	@FXML private ComboBox<Integer> feelingField; 
+	@FXML private ComboBox<Integer> accomplishmentField; 
 	@FXML private TextArea personalNoteField; 
 	@FXML private Button createBtn;
 	@FXML private Button cancelBtn;
@@ -60,10 +60,13 @@ public class WorkoutController implements PropertyChangeListener {
 		initFrom();
 		initDuration();
 		initWorkoutType();
+		initPersonalFitness();
+		initAccomplishment();
+	
 	}
 
-	
-// Initialization methods:
+
+	// Initialization methods:
 	private void initFrom() {
 		for(int i = 7; i < 24; i++){
 			if(i < 10 ? hourField.getItems().add("0"+i) : hourField.getItems().add(String.valueOf(i)));
@@ -84,6 +87,19 @@ public class WorkoutController implements PropertyChangeListener {
 	private void initWorkoutType() {
 		typeField.getItems().addAll("Uteaktivitet","Inneaktivitet");
 	}
+	
+	private void initPersonalFitness() {
+		for(int f = 1; f <= 10; f++){
+			feelingField.getItems().add(f);
+		}
+	}
+	private void initAccomplishment() {
+		for(int a = 1; a <= 10; a++){
+			accomplishmentField.getItems().add(a);
+		}
+	}
+
+	
 
 //	View-listeners:
 	@FXML
