@@ -168,8 +168,6 @@ public class WorkoutController implements PropertyChangeListener {
 		}
 	}
 	
-	
-
 
 // Model-updaters:
 	private void updateWorkoutTitleModel(){
