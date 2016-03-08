@@ -25,34 +25,53 @@ public class ExcercisesController {
 	@FXML Button moreBtn;
 	@FXML Button addBtn;
 	
-	public void initialization(){
-//		initWorkoutName();
+	public void initialize(){
+		setWorkoutTitle();
 		initType();
+		initGroup();
 		initTypeSpecifics();
-		
 	}
 
+	private void initGroup() {
+		groupField.getItems().addAll("Neck","Shoulders","Checst","Shield","Triceps","Biceps","Pecs","Abs","Thighs","Calvs");
+	}
+
+	
 	private void initType() {
 		typeField.getItems().addAll("Strength","Endurance");
 	}
 	
 	//Remeber to use type from workout!!!!
 	private void initTypeSpecifics() {
-		if(typeField.getValue() == null){
+		String workoutType = Workout.getWorkoutType();
+		System.out.println(workoutType);
+		if(workoutType == null){
 			//Do some view-logic...
 		}
-		else if(typeField.getValue().equals("Outside")){
+		else if(workoutType.equals("Outside")){
 			specOneField.setPromptText("Temp");
+			specOneField.setValue("0°C");
+			for(int t = -10;t <= 25;t++){
+				if(t == 25 ? specOneField.getItems().add(t+"+°C") : specOneField.getItems().add(t+"°C"));
+			}
 			specTwoField.setPromptText("Weather");
+			specTwoField.getItems().addAll("Sunny","Cloudy","Rain","Fog","Snow","Wind","Other");
 		}
-		else if(typeField.getValue().equals("Inside")){
+		else if(workoutType.equals("Inside")){
 			specOneField.setPromptText("AC state");
-			specTwoField.setPromptText("Weather");
+			specOneField.getItems().addAll("Good","Heavy Air","Bad");
+			specTwoField.setPromptText("Spectators");
+			for(int s = 0; s <= 11; s++){
+				if(s < 10 ? specTwoField.getItems().add("0"+s) : s == 11 ? specTwoField.getItems().add(s+"+") : specTwoField.getItems().add(String.valueOf(s)));
+			}
 		}
 		
 	}
 	
-	
+	private void setWorkoutTitle(){
+		workoutTitle.setText(Workout.getWorkoutTitle());
+		
+	}	
 	
 
 }
