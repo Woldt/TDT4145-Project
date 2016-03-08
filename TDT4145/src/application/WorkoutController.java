@@ -2,9 +2,13 @@ package application;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+import java.io.IOException;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -50,6 +54,9 @@ public class WorkoutController implements PropertyChangeListener {
 		if(Workout.TITLE_PROPERTY.equals(propertyName)){
 			updateWorkoutTitleView();
 		}
+		if(Workout.TYPE_PROPERTY.equals(propertyName)){
+			updateWorkoutTypeView();
+		}
 
 	}
 
@@ -85,7 +92,7 @@ public class WorkoutController implements PropertyChangeListener {
 	
 	
 	private void initWorkoutType() {
-		typeField.getItems().addAll("Uteaktivitet","Inneaktivitet");
+		typeField.getItems().addAll("Outside","Inside");
 	}
 	
 	private void initPersonalFitness() {
@@ -139,9 +146,29 @@ public class WorkoutController implements PropertyChangeListener {
 	private void updateWorkoutTitleView() {
 		workoutField.setText(workout.getWorkoutTitle());
 	}
+	
+
+	private void updateWorkoutTypeView() {
+		typeField.setValue(Workout.getWorkoutType());
+	}
 
 	
-	
+//Scene handler:
+	@FXML
+	private void createBtnClicked(){
+		FXMLLoader fxmlLoader = new FXMLLoader();
+		Parent scene;
+		try {
+			//DO all the validations that needs to be done before new scene. if not already done.
+			/* Validate workoutType */
+			this.workout.setWorkoutType(typeField.getValue());
+			scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
+			Main.primaryStage.setScene(new Scene(scene));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 
 }
