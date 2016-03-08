@@ -4,19 +4,26 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
 
-import javafx.scene.control.DatePicker;
 
 public class Workout {
 	
 	private static String workoutTitle; //have to be static so ExcerciseControll can access
 	private static String workoutType; //have to be static so ExcerciseControll can access
 	private  LocalDate workoutDate;
+	private int workoutDuration;
+	private int personalFitness;
+	private int workoutAccomplishment;
+	private String workoutNote;
 	
 // UI-model setup	
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 	public static final String TITLE_PROPERTY = "title";
 	public static final String TYPE_PROPERTY = "type";
 	public static final String DATE_PROPERTY = "date";
+	public static final String DURATION_PROPERTY = "duration";
+	public static final String FITNESS_PROPERTY = "fitness";
+	public static final String ACCOMPLISHMENT_PROPERTY = "accomplishment";
+	public static final String NOTE_PROPERTY = "note";
 
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -81,6 +88,51 @@ public class Workout {
 		
 	}
 
+	public void setDuration(String value) {
+		//Get minutes from value, cast to int.
+		try{
+			int oldDuration = this.workoutDuration;
+			this.workoutDuration = Integer.valueOf(value.split(" ")[0]); //example 30 min splitted on ' ' --> [30,min]
+			pcs.firePropertyChange(DURATION_PROPERTY,oldDuration, this.workoutDuration );
+		}
+		catch(Exception e){
+			
+		}
+	}
+
+	public void setPersonalFitness(Integer value) {
+		if(value == null){
+			
+		}
+		else{
+			int oldFitness = this.personalFitness;
+			this.personalFitness = value;
+			pcs.firePropertyChange(FITNESS_PROPERTY, oldFitness, this.personalFitness);
+		}
+	}
+
+	public void setWorkoutAccomplishment(Integer value) {
+		if(value == null){
+			
+		}
+		else {
+			int oldAccomplishment = this.workoutAccomplishment;
+			this.workoutAccomplishment = value;
+			pcs.firePropertyChange(ACCOMPLISHMENT_PROPERTY, oldAccomplishment, this.workoutAccomplishment);
+		}
+	}
+
+	public void setWorkoutNote(String text) {
+		if(!(text.length() <= 255)){
+			
+		}
+		else {
+			String oldNote = this.workoutNote;
+			this.workoutNote = text;
+			pcs.firePropertyChange(NOTE_PROPERTY, oldNote, this.workoutNote);
+		}
+	}
+
 	
 // Get methods	
 	public static String getWorkoutTitle() {
@@ -94,5 +146,31 @@ public class Workout {
 	public LocalDate getWorkoutDate() {
 		return workoutDate;
 	}
+
+	public String getWorkoutDuration() {
+		String minutes ="";
+		if(workoutDuration < 10){
+			minutes += "0" + workoutDuration + " min";
+		}
+		else {
+			minutes += workoutDuration + " min";
+		}
+		
+		return minutes;
+	}
+
+	public int getPersonalFitness() {
+		return personalFitness;
+	}
+
+	public int getWorkoutAccomplishment() {
+		return workoutAccomplishment;
+	}
+
+	public String getWorkoutNote() {
+		return workoutNote;
+	}
+	
+	
 
 }

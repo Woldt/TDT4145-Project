@@ -27,7 +27,7 @@ public class WorkoutController implements PropertyChangeListener {
 	@FXML private ComboBox<String> minuteField; 
 	@FXML private ComboBox<String> hourField; 
 	@FXML private ComboBox<String> durationField; 
-	@FXML private ComboBox<Integer> feelingField; 
+	@FXML private ComboBox<Integer> fitnessField; 
 	@FXML private ComboBox<Integer> accomplishmentField; 
 	@FXML private TextArea personalNoteField; 
 	@FXML private Button createBtn; //In the eventHandler, need to send workoutField value to ExcercisesController.init
@@ -62,8 +62,21 @@ public class WorkoutController implements PropertyChangeListener {
 		else if(Workout.DATE_PROPERTY.equals(propertyName)){
 			updateWorkoutDateView();
 		}
+		else if(Workout.ACCOMPLISHMENT_PROPERTY.equals(propertyName)){
+			updateWorkoutAccomplishmentView();
+		}
+		else if(Workout.DURATION_PROPERTY.equals(propertyName)){
+			updateWorkoutDurationView();
+		}
+		else if(Workout.FITNESS_PROPERTY.equals(propertyName)){
+			updateWorkoutFitnessView();
+		}
+		else if(Workout.NOTE_PROPERTY.equals(propertyName)){
+			updateWorkoutNoteView();
+		}
 
 	}
+
 
 
 	// Start of CONTROLLER Code:
@@ -102,7 +115,7 @@ public class WorkoutController implements PropertyChangeListener {
 	
 	private void initPersonalFitness() {
 		for(int f = 1; f <= 10; f++){
-			feelingField.getItems().add(f);
+			fitnessField.getItems().add(f);
 		}
 	}
 	private void initAccomplishment() {
@@ -196,6 +209,25 @@ public class WorkoutController implements PropertyChangeListener {
 	}
 
 
+	private void updateWorkoutNoteView() {
+		personalNoteField.setText(workout.getWorkoutNote());
+	}
+
+
+	private void updateWorkoutFitnessView() {
+		fitnessField.setValue(workout.getPersonalFitness());
+	}
+
+	private void updateWorkoutDurationView() {
+		durationField.setValue(workout.getWorkoutDuration());
+	}
+
+
+	private void updateWorkoutAccomplishmentView() {
+		accomplishmentField.setValue(workout.getWorkoutAccomplishment());
+	}
+
+	
 	
 //Scene handler:
 	@FXML
@@ -203,14 +235,49 @@ public class WorkoutController implements PropertyChangeListener {
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		Parent scene;
 		try {
-			//DO all the validations that needs to be done before new scene. if not already done.
+			//DO all the validations that needs to be done before new scene. if not already done.  Remember comboboxes default value is null
 			/* Validate workoutType */
-			this.workout.setWorkoutType(typeField.getValue());
-			/* Validate and set start time*/
-			/* Validate and set duration*/
-			/* Validate and set peronalFitness*/
-			/* Validate and set accomplishment*/
-			/* Validate and set personal note*/
+			if(typeField.getValue() == null){
+				//do some logic shit here
+			}
+			else{
+				this.workout.setWorkoutType(typeField.getValue());
+			}
+			
+	/* Validate and set start date*/
+			if(dateField.getValue() == null){
+				//do some logic shit here
+			}
+			else {
+				this.workout.setDate(dateField.getValue());
+			}
+	/* Validate and set start time (hour, min)*/
+	/* Validate and set duration*/
+			if(durationField.getValue() == null){
+				//do some logic shit here
+			}
+			else {
+				this.workout.setDuration(durationField.getValue());
+			}
+	/* Validate and set peronalFitness*/
+			if(fitnessField.getValue()== null){
+				//do some logic shit here
+			}
+			else {
+				this.workout.setPersonalFitness(fitnessField.getValue());
+			}
+	/* Validate and set accomplishment*/
+			if(accomplishmentField.getValue()== null){
+				
+			}
+			else {
+				//update model, with view values. REMEMBER TO ADD pcs.firePropertyChange in workout, and handling that event here under pcs connection  
+				this.workout.setWorkoutAccomplishment(accomplishmentField.getValue());
+			}
+	/* Validate and set personal note*/
+			this.workout.setWorkoutNote(personalNoteField.getText());
+			
+	/*Make new scene, and then set the scene*/
 			scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 			Main.primaryStage.setScene(new Scene(scene));
 		} catch (IOException e) {
