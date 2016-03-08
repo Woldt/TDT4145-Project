@@ -1,7 +1,7 @@
 package application;
 
 /**
- * Created by Andreas on 08.03.2016.
+ * @author Andreas Norstein
  */
 
 public abstract class Exercise {
