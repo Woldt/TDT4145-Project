@@ -187,17 +187,17 @@ public class ExcercisesController  implements PropertyChangeListener {
 					if(Workout.getWorkoutType().equals("Inside")){
 						if(specOneField.getValue() == null){
 							state = false;
-							message += "Exercise spectators not set.\n ";
+							message += "Exercise Air ventilation not set.\n ";
 						}
 						else{
-							this.strengthExercise.setSpectators(Integer.valueOf(specOneField.getValue()));
+							this.strengthExercise.setVentilation(specOneField.getValue());
 						}
 						if(specTwoField.getValue()== null){
 							state = false;
-							message += "Exercise Air condition not set.\n ";
+							message += "Exercise spectators not set.\n ";
 						}
 						else{
-							this.strengthExercise.setVentilation(specTwoField.getValue());
+							this.strengthExercise.setSpectators(Integer.valueOf(specTwoField.getValue()));
 						}
 					}
 					else { // type = Outside
