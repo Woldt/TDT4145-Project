@@ -206,7 +206,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise temperature not set.\n";
 					}
 					else{
-						this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue()));
+						this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue().split("°")[0]));
 					}
 					if(specTwoField.getValue()== null){
 						state = false;
@@ -244,11 +244,11 @@ public class ExcercisesController  implements PropertyChangeListener {
 				//No need to validate or set, because Strength exercises do not need length.
 
 			}
-			// Endurance Exercise
+// Endurance Exercise
 			else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
 				setEnduranceModel(new Endurance());
 				//do all the validations:
-				// Validate Exercise name
+		// Validate Exercise name
 				if(exerciseField.getText() == null || exerciseField.getText().equals("")){
 					state = false;
 					message += "Exercise name not filled in.\n";
@@ -256,7 +256,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 				else {
 					this.enduranceExercise.setName(exerciseField.getText());
 				}
-				// Validate Exercise Description
+		// Validate Exercise Description
 				if(descriptionField.getText().equals("")){
 					state = false;
 					message += "Exercise description not filled in.\n";
@@ -264,7 +264,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 				else{
 					this.enduranceExercise.setDescription(descriptionField.getText());
 				}
-				// Validate Exercise Goal
+		// Validate Exercise Goal
 				if(goalField.getText().equals("")){
 					state = false;
 					message += "Exercise goal not filled in.\n";
@@ -272,7 +272,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 				else{
 					//how do we handle the goal of each exercise? do we need a new class/ entity class Goal?
 				}
-				// Validate group/category
+		// Validate group/category
 				if(groupField.getValue()== null){
 					state = false;
 					message += "Exercise group not set.\n";
@@ -280,7 +280,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 				else{
 					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 				}
-				// Validate type specific 
+		// Validate type specific 
 				if(Workout.getWorkoutType().equals("Inside")){
 					if(specOneField.getValue() == null){
 						state = false;
@@ -303,7 +303,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise temperature not set.\n";
 					}
 					else{
-						this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue()));
+						this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue().split("°")[0]));
 					}
 					if(specTwoField.getValue()== null){
 						state = false;
@@ -312,47 +312,47 @@ public class ExcercisesController  implements PropertyChangeListener {
 					else{
 						this.strengthExercise.setWeather(specTwoField.getValue());
 					}
-					// Validate reps
-					if(repsField.getText().equals("")){
-						state = false;
-						message += "Exercise repetitions not set.\n";
-					}
-					else{
-						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
-					}
-					// Validate sets
-					if(setsField.getText().equals("")){
-						state = false;
-						message += "Exercise sets not set.\n";	
-					}
-					else {
-						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
-					}
-					// Validate Weight
-					if(weightField.getText().equals("")){
-						state = false;
-						message += "Exercise weigth not set.\n";
-					}
-					else{
-						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
-					}
-					// Validate Length
-					if(lenghtField.getText().equals("")){
-						state = false;
-						message += "Exercise length not set.\n";
-					}
-					else{
-						this.enduranceExercise.setLength(Integer.valueOf(lenghtField.getText().split(" ")[0]));
-					}
 				}
-				// Create State validation
-				if(state){ //The exercise to add is valid. do something 
-					scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
-					Main.primaryStage.setScene(new Scene(scene));
+		// Validate reps
+				if(repsField.getText().equals("")){
+					state = false;
+					message += "Exercise repetitions not set.\n";
 				}
 				else{
-					Alertbox.display(message);
+					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 				}
+		// Validate sets
+				if(setsField.getText().equals("")){
+					state = false;
+					message += "Exercise sets not set.\n";	
+				}
+				else {
+					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+				}
+		// Validate Weight
+				if(weightField.getText().equals("")){
+					state = false;
+					message += "Exercise weigth not set.\n";
+				}
+				else{
+					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+				}
+		// Validate Length
+				if(lenghtField.getText().equals("")){
+					state = false;
+					message += "Exercise length not set.\n";
+				}
+				else{
+					this.enduranceExercise.setLength(Integer.valueOf(lenghtField.getText().split(" ")[0]));
+				}
+			}
+// Create State validation
+			if(state){ //The exercise to add is valid. do something 
+				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
+				Main.primaryStage.setScene(new Scene(scene));
+			}
+			else{
+				Alertbox.display(message);
 			}
 		}
 		catch(Exception e){
