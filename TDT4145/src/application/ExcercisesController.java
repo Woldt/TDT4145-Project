@@ -183,7 +183,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					else{
 						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 					}
-	// Validate type specific 1
+	// Validate type specific 
 					if(Workout.getWorkoutType().equals("Inside")){
 						if(specOneField.getValue() == null){
 							state = false;
@@ -244,7 +244,6 @@ public class ExcercisesController  implements PropertyChangeListener {
 					//No need to validate or set, because Strength exercises do not need length.
 
 				}
-/*_________________________________________________________________________________________________________________________________________________*/
 // Endurance Exercise
 				else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
 					setEnduranceModel(new Endurance());
@@ -281,7 +280,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					else{
 						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 					}
-	// Validate type specific 1
+	// Validate type specific 
 					if(Workout.getWorkoutType().equals("Inside")){
 						if(specOneField.getValue() == null){
 							state = false;
