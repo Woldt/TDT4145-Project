@@ -348,8 +348,14 @@ public class ExcercisesController  implements PropertyChangeListener {
 			}
 // Create State validation
 			if(state){ //The exercise to add is valid. do something 
-				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
-				Main.primaryStage.setScene(new Scene(scene));
+//				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
+//				Main.primaryStage.setScene(new Scene(scene));
+				FXMLLoader sceneLoader = new FXMLLoader();
+				
+				Parent newScene = (Parent) sceneLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
+				Parent homeScene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
+
+				ExercisePromtBox.display(newScene,homeScene);
 			}
 			else{
 				Alertbox.display(message);
