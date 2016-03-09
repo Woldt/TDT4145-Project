@@ -4,6 +4,9 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -118,27 +121,146 @@ public class ExcercisesController  implements PropertyChangeListener {
 //Scene handler: All validation, model update and view update must happend here. First thing we must do, is set the model based on exercise type!!
 		@FXML
 		private void addBtnClicked(){
+			/* Exercise attributes that cannot be Null:
+			 * ØvelsesID - int - auto_increment - PK- Unique.
+			 * Navn - varchar(45)
+			 * Beskrivelse - varchar(45)
+			 * 
+			 * Strength-tabell:
+			 * ØvelsesID - int
+			 * Belastning - int
+			 * Antall repetisjoner - int
+			 * Antall sett - int
+			 * 
+			 * Utholdenhet-tabell
+			 * ØvelsesID - int
+			 * Lengde km - int
+			 * Minutter - int
+			*/
 			Boolean state = true;
 			String message = "";
-			if(typeField.getValue() == null){ //Type need to be choosen before we can do anything, so we can create correct exercise model.
-				message += "Exercise TYPE, need to be choosen!\n";
-				state = false;
+			FXMLLoader fxmlLoader = new FXMLLoader();
+			Parent scene;
+			try{
+	// Validate that the Exercise type is set. Create and set correct corresponding exercise model.
+				if(typeField.getValue() == null){ //Type need to be chosen before we can do anything, so we can create correct exercise model.
+					message += "Exercise TYPE, need to be choosen!\n";
+					state = false;
+				}
+// Strength Exercise
+				else if(typeField.getValue().equals("Strength")){ //Do strength exercise validations
+					setStrenghtModel(new Strength());
+					//do all the validations:
+	// Validate Exercise Name 
+					if(exerciseField.getText() == null || exerciseField.getText().equals("")){
+						state = false;
+						message += "Exercise name not filled in.\n";
+					}
+					else {
+						this.strengthExercise.setName(exerciseField.getText());
+					}
+	// Validate Exercise Description
+					if(descriptionField.getText().equals("")){
+						state = false;
+						message += "Exercise description not filled in.\n";
+					}
+					else{
+						this.strengthExercise.setDescription(descriptionField.getText());
+					}
+	// Validate Exercise Goal
+					if(goalField.getText().equals("")){
+						state = false;
+						message += "Exercise goal not filled in.\n";
+					}
+					else{
+						//how do we handle the goal of each exercise? do we need a new class/ entity class Goal?
+					}
+	// Validate group/category
+					if(groupField.getValue()== null){
+						state = false;
+						message += "Exercise group not set.\n ";
+					}
+					else{
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					}
+	// Validate type specific 1
+					if(Workout.getWorkoutType().equals("Inside")){
+						if(specOneField.getValue() == null){
+							state = false;
+							message += "Exercise spectators not set.\n ";
+						}
+						else{
+							this.strengthExercise.setSpectators(Integer.valueOf(specOneField.getValue()));
+						}
+						if(specTwoField.getValue()== null){
+							state = false;
+							message += "Exercise Air condition not set.\n ";
+						}
+						else{
+							this.strengthExercise.setVentilation(specTwoField.getValue());
+						}
+					}
+					else { // type = Outside
+						if(specOneField.getValue() == null){
+							state = false;
+							message += "Exercise temperature not set.\n ";
+						}
+						else{
+							this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue()));
+						}
+						if(specTwoField.getValue()== null){
+							state = false;
+							message += "Exercise weather not set.\n ";
+						}
+						else{
+							this.strengthExercise.setWeather(specTwoField.getValue());
+						}
+					}
+	// Validate reps
+					if(repsField.getText().equals("")){
+						state = false;
+						message += "Exercise repetitions not set.\n ";
+					}
+					else{
+						
+					}
+	// Validate sets
+					if(setsField.getText().equals("")){
+						state = false;
+						message += "Exercise sets not set.\n ";	
+					}
+					else {
+						
+					}
+	// Validate Weight
+					if(weightField.getText().equals("")){
+						state = false;
+						message += "Exercise weigth not set.\n ";
+					}
+					else{
+						
+					}
+	// Validate Length
+					//No need to validate or set, because Strength exercises do not need length.
+
+				}
+// Endurance Exercise
+				else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
+					setEnduranceModel(new Endurance());
+					//do all the validations:
+
+				}
+// Create State validation
+				if(state){ //The exercise to add is valid. do something 
+					scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
+					Main.primaryStage.setScene(new Scene(scene));
+				}
+				else{
+					Alertbox.display(message);
+				}
 			}
-			else if(typeField.getValue().equals("Strength")){ //Do strength exercise validations
-				setStrenghtModel(new Strength());
-				//do all the validations:
-				
-			}
-			else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
-				setEnduranceModel(new Endurance());
-				//do all the validations:
-				
-			}
-			if(state){ //The exercise to add is valid. do something 
-				
-			}
-			else{
-				Alertbox.display(message);
+			catch(Exception e){
+				e.printStackTrace();
 			}
 		}
 }
