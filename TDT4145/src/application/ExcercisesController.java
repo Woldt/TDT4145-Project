@@ -287,14 +287,14 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise Air ventilation not set.\n";
 					}
 					else{
-						this.strengthExercise.setVentilation(specOneField.getValue());
+						this.enduranceExercise.setVentilation(specOneField.getValue());
 					}
 					if(specTwoField.getValue()== null){
 						state = false;
 						message += "Exercise spectators not set.\n";
 					}
 					else{
-						this.strengthExercise.setSpectators(Integer.valueOf(specTwoField.getValue()));
+						this.enduranceExercise.setSpectators(Integer.valueOf(specTwoField.getValue()));
 					}
 				}
 				else { // type = Outside
@@ -303,14 +303,14 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise temperature not set.\n";
 					}
 					else{
-						this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue().split("°")[0]));
+						this.enduranceExercise.setTemp(Integer.valueOf(specOneField.getValue().split("°")[0]));
 					}
 					if(specTwoField.getValue()== null){
 						state = false;
 						message += "Exercise weather not set.\n";
 					}
 					else{
-						this.strengthExercise.setWeather(specTwoField.getValue());
+						this.enduranceExercise.setWeather(specTwoField.getValue());
 					}
 				}
 		// Validate reps
