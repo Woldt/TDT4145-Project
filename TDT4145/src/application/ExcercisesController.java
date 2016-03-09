@@ -244,11 +244,100 @@ public class ExcercisesController  implements PropertyChangeListener {
 					//No need to validate or set, because Strength exercises do not need length.
 
 				}
+/*_________________________________________________________________________________________________________________________________________________*/
 // Endurance Exercise
 				else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
 					setEnduranceModel(new Endurance());
 					//do all the validations:
-					
+	// Validate Exercise name
+					if(exerciseField.getText() == null || exerciseField.getText().equals("")){
+						state = false;
+						message += "Exercise name not filled in.\n";
+					}
+					else {
+						this.enduranceExercise.setName(exerciseField.getText());
+					}
+	// Validate Exercise Description
+					if(descriptionField.getText().equals("")){
+						state = false;
+						message += "Exercise description not filled in.\n";
+					}
+					else{
+						this.enduranceExercise.setDescription(descriptionField.getText());
+					}
+	// Validate Exercise Goal
+					if(goalField.getText().equals("")){
+						state = false;
+						message += "Exercise goal not filled in.\n";
+					}
+					else{
+						//how do we handle the goal of each exercise? do we need a new class/ entity class Goal?
+					}
+	// Validate group/category
+					if(groupField.getValue()== null){
+						state = false;
+						message += "Exercise group not set.\n";
+					}
+					else{
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					}
+	// Validate type specific 1
+					if(Workout.getWorkoutType().equals("Inside")){
+						if(specOneField.getValue() == null){
+							state = false;
+						}
+						else{
+						}
+						if(specTwoField.getValue()== null){
+							state = false;
+						}
+						else{
+						}
+					}
+					else { // type = Outside
+						if(specOneField.getValue() == null){
+							state = false;
+						}
+						else{
+						}
+						if(specTwoField.getValue()== null){
+							state = false;
+						}
+						else{
+						}
+					}
+	// Validate reps
+					if(repsField.getText().equals("")){
+						state = false;
+						message += "Exercise repetitions not set.\n";
+					}
+					else{
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					}
+	// Validate sets
+					if(setsField.getText().equals("")){
+						state = false;
+						message += "Exercise sets not set.\n";	
+					}
+					else {
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					}
+	// Validate Weight
+					if(weightField.getText().equals("")){
+						state = false;
+						message += "Exercise weigth not set.\n";
+					}
+					else{
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					}
+	// Validate Length
+					if(lenghtField.getText().equals("")){
+						state = false;
+						message += "Exercise length not st.\n";
+					}
+					else{
+						this.enduranceExercise.setLength(Integer.valueOf(lenghtField.getText().split(" ")[0]));
+					}
 					
 
 				}
