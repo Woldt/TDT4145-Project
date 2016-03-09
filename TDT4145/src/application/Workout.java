@@ -7,6 +7,8 @@ import java.time.LocalDate;
 
 public class Workout {
 	
+	private int workoutID;
+	
 	private static String workoutTitle; //have to be static so ExcerciseControll can access
 	private static String workoutType; //have to be static so ExcerciseControll can access
 	private  LocalDate workoutDate;
