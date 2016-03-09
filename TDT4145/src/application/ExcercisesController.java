@@ -248,6 +248,8 @@ public class ExcercisesController  implements PropertyChangeListener {
 				else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
 					setEnduranceModel(new Endurance());
 					//do all the validations:
+					
+					
 
 				}
 // Create State validation
