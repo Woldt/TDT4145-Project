@@ -222,7 +222,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise repetitions not set.\n";
 					}
 					else{
-						
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 					}
 	// Validate sets
 					if(setsField.getText().equals("")){
@@ -230,7 +230,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise sets not set.\n";	
 					}
 					else {
-						
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 					}
 	// Validate Weight
 					if(weightField.getText().equals("")){
@@ -238,7 +238,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 						message += "Exercise weigth not set.\n";
 					}
 					else{
-						
+						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 					}
 	// Validate Length
 					//No need to validate or set, because Strength exercises do not need length.
