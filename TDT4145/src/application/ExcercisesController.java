@@ -178,7 +178,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 	// Validate group/category
 					if(groupField.getValue()== null){
 						state = false;
-						message += "Exercise group not set.\n ";
+						message += "Exercise group not set.\n";
 					}
 					else{
 						//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
@@ -187,14 +187,14 @@ public class ExcercisesController  implements PropertyChangeListener {
 					if(Workout.getWorkoutType().equals("Inside")){
 						if(specOneField.getValue() == null){
 							state = false;
-							message += "Exercise Air ventilation not set.\n ";
+							message += "Exercise Air ventilation not set.\n";
 						}
 						else{
 							this.strengthExercise.setVentilation(specOneField.getValue());
 						}
 						if(specTwoField.getValue()== null){
 							state = false;
-							message += "Exercise spectators not set.\n ";
+							message += "Exercise spectators not set.\n";
 						}
 						else{
 							this.strengthExercise.setSpectators(Integer.valueOf(specTwoField.getValue()));
@@ -203,14 +203,14 @@ public class ExcercisesController  implements PropertyChangeListener {
 					else { // type = Outside
 						if(specOneField.getValue() == null){
 							state = false;
-							message += "Exercise temperature not set.\n ";
+							message += "Exercise temperature not set.\n";
 						}
 						else{
 							this.strengthExercise.setTemp(Integer.valueOf(specOneField.getValue()));
 						}
 						if(specTwoField.getValue()== null){
 							state = false;
-							message += "Exercise weather not set.\n ";
+							message += "Exercise weather not set.\n";
 						}
 						else{
 							this.strengthExercise.setWeather(specTwoField.getValue());
@@ -219,7 +219,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 	// Validate reps
 					if(repsField.getText().equals("")){
 						state = false;
-						message += "Exercise repetitions not set.\n ";
+						message += "Exercise repetitions not set.\n";
 					}
 					else{
 						
@@ -227,7 +227,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 	// Validate sets
 					if(setsField.getText().equals("")){
 						state = false;
-						message += "Exercise sets not set.\n ";	
+						message += "Exercise sets not set.\n";	
 					}
 					else {
 						
@@ -235,7 +235,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 	// Validate Weight
 					if(weightField.getText().equals("")){
 						state = false;
-						message += "Exercise weigth not set.\n ";
+						message += "Exercise weigth not set.\n";
 					}
 					else{
 						
