@@ -1,6 +1,7 @@
 package application;
 
 import java.sql.*;
+
 import resources.DatabaseCredentials;
 /**
  * @author SigveAndreEvensen
@@ -20,6 +21,9 @@ public class DatabaseConnection {
 	private Connection conn = null;
 	private Statement stmt = null;
 	
+	
+	PreparedStatement preparedStatement;
+	
 	private ResultSet rs;
 
 	/**
@@ -27,10 +31,10 @@ public class DatabaseConnection {
 	 * Class.forName register JDBC Driver
 	 * conn tries to establish the physical connection
 	 */
-	private void establishConnection(){	
+	public void establishConnection(){	
 		try{
 			//STEP 2: Register JDBC driver
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 			//STEP 3: Open a connection
 			System.out.println("Connecting to database...");
@@ -51,12 +55,13 @@ public class DatabaseConnection {
 	 * Prints SQLEceptions if thrown.
 	 * @param query Complete SQL-query statement.
 	 */
-	private void executeQuery(String query){
+	public void insert(String query){
 		//STEP 4: Execute a query
 		System.out.println("Creating statement...");
 		try {
 			stmt = conn.createStatement();
-			rs = stmt.executeQuery(query);
+			preparedStatement = conn.prepareStatement(query);
+			stmt.executeUpdate(query);
 		} catch (SQLException e) {
 			System.out.println(e);;
 		}
@@ -66,22 +71,23 @@ public class DatabaseConnection {
 	/**
 	 * Method to handle the resultTabel generated from executeQuery(String query)
 	 */
-	private void resultToString(){
+	public void ovelseToString(){
 		//STEP 5: Extract data from result set
-		try {
+		try {	//Display or do something with values
+			stmt = conn.createStatement();
+			String query = "SELECT * FROM Øvelse"; 
+			rs = stmt.executeQuery(query);		
 			while(rs.next()){
-				//Retrieve by column name
-			/*
-			 	to retrieve int use rs.getInt("attributeName")
-				to retrieve String use rs.getString("attributeName")
-				to retrieve Time use rs.getTime(columnIndex or "attributeName")
-			 */				
+				//get attributes.
+				int ID = rs.getInt("ØvelsesID");
+				String name = rs.getString("Navn");
+				String desc = rs.getString("Beskrivelse");
 				
-				
-				//Display or do something with values
-
+				//Display tuple.
+				String tupel = "ID: " + ID + "\nName: " + name + "\nDescription: " + desc;
+				System.out.println(tupel);
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
