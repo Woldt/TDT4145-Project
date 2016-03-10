@@ -17,6 +17,10 @@ public class DBTest {
 		conn.ovelseToString();
 	}
 	
+	void exit(){
+		conn.terminateConnection();
+	}
+	
 	public static void main(String[] args) {
 		DBTest dbt = new DBTest();
 		dbt.init();

@@ -98,7 +98,7 @@ public class DatabaseConnection {
 	 * Terminates the established connection
 	 * Closes stmt, and conn.
 	 */
-	private void terminateConnection(){
+	public void terminateConnection(){
 		//STEP 6: Clean-up environment
 		try{
 			if(stmt!=null)
