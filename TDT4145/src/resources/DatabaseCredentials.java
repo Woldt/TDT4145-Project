@@ -14,8 +14,8 @@ public class DatabaseCredentials {
 	static final String DB_URL = "jdbc:mysql://mysql.stud.ntnu.no/martsti_tdt4145";  /*  jdbc:mysql://host:port/database  */
 	
 //  Database credentials
-	private static final String USER = "username";
-	private static final String PASS = "password";
+	private static final String USER = "martsti";
+	private static final String PASS = "server123";
 	
 	/**
 	 * @return JDBC_DRIVER string containing url to driver.

@@ -1,6 +1,7 @@
 package resources;
 
-import application.DatabaseConnection;;
+import application.DatabaseConnection;
+import application.Tabell;;
 
 public class DBTest {
 
@@ -12,7 +13,7 @@ public class DBTest {
 	}
 	
 	void run(){
-		String insrt = "INSERT INTO Øvelse VALUES(2, 'Push up', 'Opptrekk');"; 
+		String insrt = "INSERT INTO " + Tabell.Øvelse + " VALUES(7, 'Hangups', 'Opptrekk');"; 
 		conn.insert(insrt);
 		conn.ovelseToString();
 	}
