@@ -5,24 +5,21 @@ package application;
  * @author Martin Stigen
  *
  */
-public enum Tabell {
+
+public class Tabell {
 	
-	Innendørsøvelse("Innendørsøvelse"),
-	Mål("Mål"),
-	Resultat("Resultat"),
-	StyrkeOgKondisjon("Styrke og kondisjon"),
-	Treningsøkt("Treningsøkt"),
-	Utendørsøvelse("Utendørsøvelse"),
-	Utholdenhet("Utholdenhet"),
-	Øvelse("Øvelse");
-	
-	private final String path; 
-	
-	Tabell(String path) {
-		this.path = path;
+	public static class Insert {
+		
+		private static final String TODO = "INSERT INTO ";
+		
+		public static String Innendørsøvelse(int øvelsesID, String luftventilasjon, int antallTilskuere) {
+			return TODO + "Innendørsøvelse VALUES(" + øvelsesID + ", '" + luftventilasjon + "', " + antallTilskuere +");";
+		}
 	}
 	
-	public String toString() {
-		return path;
+	
+	
+	public static void main(String[] args) {
+		System.out.println(Tabell.Insert.Innendørsøvelse(1, "bra", 10));
 	}
 }
