@@ -13,7 +13,7 @@ public class DBTest {
 	}
 	
 	void run(){
-		String insrt = Tabell.Insert.Innendørsøvelse(10, "Bra", 11); 
+		String insrt = Tabell.INSERT.INNENDØRSØVELSE(10, "bra", 11); 
 		conn.insert(insrt);
 		conn.ovelseToString();
 	}
