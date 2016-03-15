@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.util.converter.LocalTimeStringConverter;
 import javafx.event.ActionEvent;
 
 public class WorkoutController implements PropertyChangeListener {
@@ -73,6 +75,12 @@ public class WorkoutController implements PropertyChangeListener {
 		}
 		else if(Workout.NOTE_PROPERTY.equals(propertyName)){
 			updateWorkoutNoteView();
+		}
+		else if(Workout.HOUR_PROPERTY.equals(propertyName)){
+			updateWorkoutHourView();
+		}
+		else if(Workout.MINUTE_PROPERTY.equals(propertyName)){
+			updateWorkoutMinuteView();
 		}
 
 	}
@@ -181,7 +189,17 @@ public class WorkoutController implements PropertyChangeListener {
 		}
 	}
 	
+	@FXML
+	public void startHourChange(){
+		updateStartHourModel();
+	}
 
+	@FXML
+	public void startMinChange(){
+		updateStartMinModel();
+	}
+
+	
 // Model-updaters:
 	private void updateWorkoutTitleModel(){
 		this.workout.setWorkoutTitle(workoutField.getText());
@@ -191,9 +209,20 @@ public class WorkoutController implements PropertyChangeListener {
 		this.workout.setDate(dateField.getValue());
 	}
 	
+	private void updateStartHourModel(){
+		this.workout.setWorkoutHour(hourField.getValue());
+		
+	}
+	
+	private void updateStartMinModel(){
+		this.workout.setWorkoutMinute(minuteField.getValue());			
+		
+	}
+	
 	
 	
 // View-updaters:
+
 	private void updateWorkoutTitleView() {
 		workoutField.setText(Workout.getWorkoutTitle());
 	}
@@ -226,7 +255,16 @@ public class WorkoutController implements PropertyChangeListener {
 	private void updateWorkoutAccomplishmentView() {
 		accomplishmentField.setValue(workout.getWorkoutAccomplishment());
 	}
+	
+	private void updateWorkoutHourView(){
+		hourField.setValue(workout.getWorkoutHour());
+	}
 
+	private void updateWorkoutMinuteView(){
+		minuteField.setValue(workout.getWorkoutMinute());
+	}
+
+	
 	
 	
 //Scene handler:
@@ -290,6 +328,10 @@ public class WorkoutController implements PropertyChangeListener {
 	/*Make new scene, and then set the scene*/
 			if(state){
 				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
+				String time = workout.getWorkoutHour() + ":" + workout.getWorkoutMinute();
+				
+				
+				Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote());
 				Main.primaryStage.setScene(new Scene(scene));
 			}
 			else {
