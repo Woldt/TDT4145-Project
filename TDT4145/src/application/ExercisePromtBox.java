@@ -42,9 +42,11 @@ public class ExercisePromtBox {
 			Main.primaryStage.setScene(new Scene (newScene));
 			if(type.equals("Strength")){
 				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description ));
+				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Strength.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			}
 			else{
 				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description ));
+				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Endurance.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			}
 			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			window.close();
@@ -54,9 +56,11 @@ public class ExercisePromtBox {
 			Main.primaryStage.setScene(new Scene (homeScene));
 			if(type.equals("Strength")){
 				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description ));
+				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Strength.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			}
 			else{
 				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description ));
+				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Endurance.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			}
 			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			window.close();

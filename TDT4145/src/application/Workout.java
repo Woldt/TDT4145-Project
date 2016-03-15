@@ -11,7 +11,7 @@ public class Workout {
 	
 	private static String workoutTitle; //have to be static so ExcerciseControll can access
 	private static String workoutType; //have to be static so ExcerciseControll can access
-	private  LocalDate workoutDate;
+	private static  LocalDate workoutDate;
 	private int workoutDuration;
 	private int personalFitness;
 	private int workoutAccomplishment;
@@ -161,7 +161,7 @@ public class Workout {
 		return workoutType;
 	}
 
-	public LocalDate getWorkoutDate() {
+	public static LocalDate getWorkoutDate() {
 		return workoutDate;
 	}
 

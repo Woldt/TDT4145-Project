@@ -16,8 +16,8 @@ public class Tabell {
 			return TODO + "Innendørsøvelse " + values(valueOf(øvelsesID), valueOf(luftventilasjon), valueOf(antallTilskuere));
 		}
 		
-		public static String MÅL(int målNr, String tidsperiode, String beskrivelse, int øvelsesID) {
-			return TODO + "Mål " + values(valueOf(målNr), valueOf(tidsperiode), valueOf(beskrivelse), valueOf(øvelsesID));
+		public static String MÅL(String tidsperiode, String beskrivelse, int øvelsesID) {
+			return TODO + "Mål " + values("DEFAULT", valueOf(tidsperiode), valueOf(beskrivelse), valueOf(øvelsesID));
 		}
 		
 		public static String RESULTAT(int resultatNr, String besteResultat, String dato, int øvelsesID) {
