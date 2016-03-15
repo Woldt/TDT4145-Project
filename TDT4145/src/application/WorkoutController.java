@@ -340,7 +340,7 @@ public class WorkoutController implements PropertyChangeListener {
 			if(state){
 				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 				String time = workout.getWorkoutHour() + ":" + workout.getWorkoutMinute();
-				
+					
 				System.out.println(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
 				Database.insert(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
 				Main.primaryStage.setScene(new Scene(scene));

@@ -43,6 +43,9 @@ public class Tabell {
 		public static String ØVELSE(String navn, String beskrivelse) {
 			return TODO + "Øvelse " + values("DEFAULT" , valueOf(navn), valueOf(beskrivelse));
 		}
+		public static String BESTÅR_AV(int treningsid, int øvelsesid) {
+			return TODO + "BestårAv " + values(valueOf(treningsid), valueOf(øvelsesid));
+		}
 	}
 	
 	public static class SELECT {

@@ -1,6 +1,7 @@
 package application;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
@@ -28,16 +29,27 @@ public class ExercisePromtBox {
 
 		Button yes_btn = new Button("Ja");
 		Button no_btn = new Button("Nei");
-
+	
+		ArrayList<String> treningsID = Database.select("Select count(*) from Treningsøkt;");
+		ArrayList<String> øvelsesID = Database.select("Select count(*) from Øvelse;");
+		
+		System.out.println(treningsID.get(0).toString());
+		System.out.println(øvelsesID.get(0).toString());
+	
 	
 		yes_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (newScene));
+			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),"YOLO" ));
+			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1]+1)));
 			window.close();
 		});	
 
 		no_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (homeScene));
+			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),"YOLO" ));
+			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1]+1)));
 			window.close();
+
 		});
 
 
