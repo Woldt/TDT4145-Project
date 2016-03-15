@@ -5,7 +5,9 @@ import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
+import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
@@ -19,12 +21,14 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class WorkoutController implements PropertyChangeListener {
 
@@ -351,7 +355,7 @@ public class WorkoutController implements PropertyChangeListener {
 		}
 	}
 	
-	@FXML private TableView<String> workoutList;
+	@FXML private TableView<List<String>> workoutList;
 	
 	@FXML
 	private void loadWorkouts(Event event) {
@@ -359,19 +363,31 @@ public class WorkoutController implements PropertyChangeListener {
 			ArrayList<String> result = Database.select(Tabell.SELECT.TRENINGSØKT());
 			if (result.size() > 0) {
 				String[] firstSplit = result.get(0).split(",");
-				for (int i = 0; i < result.get(0).split(",").length; i += 2) {
-					workoutList.getColumns().add(new TableColumn<>(firstSplit[i]));
+				for (int i = 0; i < result.get(0).split(",").length; i ++) {
+					final String kolonneNavn = firstSplit[i].split(":")[0];
+					TableColumn<List<String>,String> kolonne = new TableColumn<>(kolonneNavn);
+					final int colIndex = i;
+					kolonne.setCellValueFactory(data -> {
+		                List<String> rowValues = data.getValue();
+		                String cellValue ;
+		                if (colIndex < rowValues.size()) {
+		                    cellValue = rowValues.get(colIndex);
+		                } else {
+		                     cellValue = "" ;
+		                }
+		                return new ReadOnlyStringWrapper(cellValue);
+		            });
+					workoutList.getColumns().add(kolonne);
 				}
 				for (String row : result) {
 					String[] split = row.split(",");
-					for (int j = 0; j < split.length; j += 2) {	
-						String[] secondSplit = split[j].split(":");
-//						workoutList.getItems().add(secondSplit[1]);
-//						workoutList.getItems().add(secondSplit[1]);
+					ArrayList<String> verdier = new ArrayList<String>();
+					for (int i = 0; i < split.length; i ++) {
+						verdier.add(split[i].split(":")[1]);
 					}
+					workoutList.getItems().add(verdier);
 				}
 			}
 		}
 	}
-
 }
