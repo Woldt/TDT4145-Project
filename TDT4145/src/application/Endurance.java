@@ -32,6 +32,7 @@ public class Endurance extends Exercise {
 	}
 
 // Set methods
+		
     public void setLength(int length) {
         this.length = length;
     }
@@ -48,6 +49,8 @@ public class Endurance extends Exercise {
     public int getMinutes() {
         return minutes;
     }
+    
+    
 
 
 }

@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class ExercisePromtBox {
 
 
-	public static void display(Parent newScene, Parent homeScene){
+	public static void display(Parent newScene, Parent homeScene, String type){
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL); //have to close this window before allowed to interact with other windows
 		window.setTitle("AddExercise?");
@@ -36,18 +36,29 @@ public class ExercisePromtBox {
 		System.out.println(treningsID.get(0).toString());
 		System.out.println(øvelsesID.get(0).toString());
 	
+		System.out.println(treningsID.get(0).split(";")[1]);
 	
 		yes_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (newScene));
-			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),"YOLO" ));
-			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1]+1)));
+			if(type.equals("Strength")){
+				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description ));
+			}
+			else{
+				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description ));
+			}
+			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			window.close();
 		});	
 
 		no_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (homeScene));
-			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),"YOLO" ));
-			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1]+1)));
+			if(type.equals("Strength")){
+				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description ));
+			}
+			else{
+				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description ));
+			}
+			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			window.close();
 
 		});

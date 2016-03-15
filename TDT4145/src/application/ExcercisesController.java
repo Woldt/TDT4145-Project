@@ -138,6 +138,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 		 * Minutter - int
 		 */
 		Boolean state = true;
+		String exerciseType = null;
 		String message = "";
 		FXMLLoader fxmlLoader = new FXMLLoader();
 		Parent scene;
@@ -150,6 +151,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 			// Strength Exercise
 			else if(typeField.getValue().equals("Strength")){ //Do strength exercise validations
 				setStrenghtModel(new Strength());
+				exerciseType = "Strength";
 				//do all the validations:
 				// Validate Exercise Name 
 				if(exerciseField.getText() == null || exerciseField.getText().equals("")){
@@ -247,6 +249,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 // Endurance Exercise
 			else if(typeField.getValue().equals("Endurance")){ //Do endurance exercise validations
 				setEnduranceModel(new Endurance());
+				exerciseType = "Endurance";
 				//do all the validations:
 		// Validate Exercise name
 				if(exerciseField.getText() == null || exerciseField.getText().equals("")){
@@ -355,7 +358,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 				Parent newScene = (Parent) sceneLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 				Parent homeScene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("DiaryGUI.fxml"));
 
-				ExercisePromtBox.display(newScene,homeScene);
+				ExercisePromtBox.display(newScene,homeScene,exerciseType);
 			}
 			else{
 				Alertbox.display(message);

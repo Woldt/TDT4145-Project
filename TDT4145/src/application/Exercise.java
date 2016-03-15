@@ -8,7 +8,7 @@ public abstract class Exercise {
 
     protected int ovelsesID;
     protected String name;
-    protected String description;
+    protected static String description;
 
     protected int temp; //outdoor exercise
     protected String weather; //outdoor exercise
