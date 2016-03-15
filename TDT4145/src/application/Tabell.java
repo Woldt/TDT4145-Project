@@ -17,11 +17,11 @@ public class Tabell {
 		}
 		
 		public static String MÅL(int målNr, String tidsperiode, String beskrivelse, int øvelsesID) {
-			return TODO + "Mål " + values(valueOf(målNr), valueOf(tidsperiode), valueOf(beskrivelse), valueOf(øvelsesID));
+			return TODO + "Mål " + values(valueOf(målNr), tidsperiode, valueOf(beskrivelse), valueOf(øvelsesID));
 		}
 		
 		public static String RESULTAT(int resultatNr, String besteResultat, String dato, int øvelsesID) {
-			return TODO + "Resultat " + values(valueOf(resultatNr), valueOf(besteResultat), valueOf(dato), valueOf(øvelsesID));
+			return TODO + "Resultat " + values(valueOf(resultatNr), valueOf(besteResultat), dato, valueOf(øvelsesID));
 		}
 		
 		public static String STYRKE_OG_KONDISJON(int øvelsesID, int belastning, int antallRep, int antallSett) {
@@ -29,7 +29,7 @@ public class Tabell {
 		}
 		
 		public static String TRENINGSØKT(String dato, String tidspunkt, int varighet, int personligForm, int prestasjon, String notat) {
-			return TODO + "Treningsøkt " + values(valueOf(dato), valueOf(tidspunkt), valueOf(varighet), valueOf(personligForm), valueOf(prestasjon), valueOf(notat));
+			return TODO + "Treningsøkt " + values(dato, tidspunkt, valueOf(varighet), valueOf(personligForm), valueOf(prestasjon), valueOf(notat));
 		}
 		
 		public static String UTENDØRSØVELSE(int øvelsesID, int temperatur, String værtype) {
