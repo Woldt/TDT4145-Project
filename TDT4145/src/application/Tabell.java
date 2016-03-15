@@ -13,35 +13,72 @@ public class Tabell {
 		private static final String TODO = "INSERT INTO ";
 		
 		public static String INNENDØRSØVELSE(int øvelsesID, String luftventilasjon, int antallTilskuere) {
-			return TODO + values(valueOf(øvelsesID), valueOf(luftventilasjon), valueOf(antallTilskuere));
+			return TODO + "Innendørsøvelse " + values(valueOf(øvelsesID), valueOf(luftventilasjon), valueOf(antallTilskuere));
 		}
 		
 		public static String MÅL(int målNr, String tidsperiode, String beskrivelse, int øvelsesID) {
-			return TODO + values(valueOf(målNr), valueOf(tidsperiode), valueOf(beskrivelse), valueOf(øvelsesID));
+			return TODO + "Mål " + values(valueOf(målNr), valueOf(tidsperiode), valueOf(beskrivelse), valueOf(øvelsesID));
 		}
 		
 		public static String RESULTAT(int resultatNr, String besteResultat, String dato, int øvelsesID) {
-			return TODO + values(valueOf(resultatNr), valueOf(besteResultat), valueOf(dato), valueOf(øvelsesID));
+			return TODO + "Resultat " + values(valueOf(resultatNr), valueOf(besteResultat), valueOf(dato), valueOf(øvelsesID));
 		}
 		
 		public static String STYRKE_OG_KONDISJON(int øvelsesID, int belastning, int antallRep, int antallSett) {
-			return TODO + values(valueOf(øvelsesID), valueOf(belastning), valueOf(antallRep), valueOf(antallSett));
+			return TODO + "Styrke og kondisjon " + values(valueOf(øvelsesID), valueOf(belastning), valueOf(antallRep), valueOf(antallSett));
 		}
 		
-		public static String TRENINGSØKT(int treningsID, String dato, String tidspunkt, int varighet, int personligForm, int prestasjon, String notat) {
-			return TODO + values(valueOf(treningsID), valueOf(dato), valueOf(tidspunkt), valueOf(varighet), valueOf(personligForm), valueOf(prestasjon), valueOf(notat));
+		public static String TRENINGSØKT(String dato, String tidspunkt, int varighet, int personligForm, int prestasjon, String notat) {
+			return TODO + "Treningsøkt " + values(valueOf(dato), valueOf(tidspunkt), valueOf(varighet), valueOf(personligForm), valueOf(prestasjon), valueOf(notat));
 		}
 		
 		public static String UTENDØRSØVELSE(int øvelsesID, int temperatur, String værtype) {
-			return TODO + values(valueOf(øvelsesID), valueOf(temperatur), valueOf(værtype));
+			return TODO + "Utendørsøvelse " + values(valueOf(øvelsesID), valueOf(temperatur), valueOf(værtype));
 		}
 		
 		public static String UTHOLDENHET(int øvelsesID, int lengdeKm, int minutter) {
-			return TODO + values(valueOf(øvelsesID), valueOf(lengdeKm), valueOf(minutter));
+			return TODO + "Utholdenhet " + values(valueOf(øvelsesID), valueOf(lengdeKm), valueOf(minutter));
 		}
 		
-		public static String ØVELSE(int øvelsesID, String navn, String beskrivelse) {
-			return TODO + values(valueOf(øvelsesID), valueOf(navn), valueOf(beskrivelse));
+		public static String ØVELSE(String navn, String beskrivelse) {
+			return TODO + "Øvelse " + values(valueOf(navn), valueOf(beskrivelse));
+		}
+	}
+	
+	public static class SELECT {
+		
+		private static final String TODO = "SELECT * FROM ";
+		
+		public static String INNENDØRSØVELSE() {
+			return TODO + "Innendørsøvelse";
+		}
+		
+		public static String MÅL() {
+			return TODO + "Mål";
+		}
+		
+		public static String RESULTAT() {
+			return TODO + "Resultat";
+		}
+		
+		public static String STYRKE_OG_KONDISJON() {
+			return TODO + "Styrke og kondisjon";
+		}
+		
+		public static String TRENINGSØKT() {
+			return TODO + "Treningsøkt";
+		}
+		
+		public static String UTENDØRSØVELSE() {
+			return TODO + "Utendørsøvelse";
+		}
+		
+		public static String UTHOLDENHET() {
+			return TODO + "Utholdenhet";
+		}
+		
+		public static String ØVELSE() {
+			return TODO + "Øvelse";
 		}
 	}
 	
