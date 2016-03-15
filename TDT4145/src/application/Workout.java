@@ -16,6 +16,8 @@ public class Workout {
 	private int personalFitness;
 	private int workoutAccomplishment;
 	private String workoutNote;
+	private String workoutHour;
+	private String workoutMinute; 
 	
 // UI-model setup	
 	private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -26,6 +28,8 @@ public class Workout {
 	public static final String FITNESS_PROPERTY = "fitness";
 	public static final String ACCOMPLISHMENT_PROPERTY = "accomplishment";
 	public static final String NOTE_PROPERTY = "note";
+	public static final String HOUR_PROPERTY = "hour";
+	public static final String MINUTE_PROPERTY = "minute";
 
 
 	public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -135,7 +139,18 @@ public class Workout {
 			this.workoutNote = "NULL";
 		}
 	}
-
+	
+	public void setWorkoutHour(String workoutHour){
+		String oldHour = this.workoutHour;
+		this.workoutHour = workoutHour;
+		pcs.firePropertyChange(HOUR_PROPERTY, oldHour, this.workoutHour);
+	}
+	public void setWorkoutMinute(String workoutMinute){
+		String oldMinute = this.workoutMinute;
+		this.workoutMinute = workoutMinute;
+		pcs.firePropertyChange(MINUTE_PROPERTY, oldMinute, this.workoutMinute);
+	}
+	
 	
 // Get methods	
 	public static String getWorkoutTitle() {
@@ -174,6 +189,19 @@ public class Workout {
 	public String getWorkoutNote() {
 		return workoutNote;
 	}
+	
+	public String getWorkoutMinute() {
+		return workoutMinute;
+	}
+	
+	public String getWorkoutHour(){
+		return workoutHour;
+	}
+	
+	public int getWorkoutDurationTime(){
+		return workoutDuration;
+	}
+	
 	
 	
 

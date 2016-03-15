@@ -28,8 +28,8 @@ public class Tabell {
 			return TODO + values(valueOf(øvelsesID), valueOf(belastning), valueOf(antallRep), valueOf(antallSett));
 		}
 		
-		public static String TRENINGSØKT(int treningsID, String dato, String tidspunkt, int varighet, int personligForm, int prestasjon, String notat) {
-			return TODO + values(valueOf(treningsID), valueOf(dato), valueOf(tidspunkt), valueOf(varighet), valueOf(personligForm), valueOf(prestasjon), valueOf(notat));
+		public static String TRENINGSØKT(String dato, String tidspunkt, int varighet, int personligForm, int prestasjon, String notat) {
+			return TODO + values(valueOf(dato), valueOf(tidspunkt), valueOf(varighet), valueOf(personligForm), valueOf(prestasjon), valueOf(notat));
 		}
 		
 		public static String UTENDØRSØVELSE(int øvelsesID, int temperatur, String værtype) {
@@ -40,8 +40,8 @@ public class Tabell {
 			return TODO + values(valueOf(øvelsesID), valueOf(lengdeKm), valueOf(minutter));
 		}
 		
-		public static String ØVELSE(int øvelsesID, String navn, String beskrivelse) {
-			return TODO + values(valueOf(øvelsesID), valueOf(navn), valueOf(beskrivelse));
+		public static String ØVELSE(String navn, String beskrivelse) {
+			return TODO + values(valueOf(navn), valueOf(beskrivelse));
 		}
 	}
 	
