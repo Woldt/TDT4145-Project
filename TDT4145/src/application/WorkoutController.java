@@ -7,6 +7,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -17,8 +18,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Tab;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
 
@@ -347,18 +351,24 @@ public class WorkoutController implements PropertyChangeListener {
 		}
 	}
 	
-	@FXML private TreeTableView<String> workoutList;
+	@FXML private TableView<String> workoutList;
 	
 	@FXML
 	private void loadWorkouts(Event event) {
 		if (((Tab) event.getTarget()).isSelected()) {
 			ArrayList<String> result = Database.select(Tabell.SELECT.TRENINGSØKT());
-			workoutList.getColumns().clear();
-			for (String row : result) {
-				String[] split = row.split(",");
-				for (int j = 0; j < split.length; j ++) {	
-					String[] secondSplit = split[j].split(":");
-//					workoutList.getColumns().add(new TreeTableColumn(secondSplit[0]));
+			if (result.size() > 0) {
+				String[] firstSplit = result.get(0).split(",");
+				for (int i = 0; i < result.get(0).split(",").length; i += 2) {
+					workoutList.getColumns().add(new TableColumn<>(firstSplit[i]));
+				}
+				for (String row : result) {
+					String[] split = row.split(",");
+					for (int j = 0; j < split.length; j += 2) {	
+						String[] secondSplit = split[j].split(":");
+//						workoutList.getItems().add(secondSplit[1]);
+//						workoutList.getItems().add(secondSplit[1]);
+					}
 				}
 			}
 		}
