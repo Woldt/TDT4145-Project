@@ -360,6 +360,8 @@ public class WorkoutController implements PropertyChangeListener {
 	@FXML
 	private void loadWorkouts(Event event) {
 		if (((Tab) event.getTarget()).isSelected()) {
+			workoutList.getItems().clear();
+			workoutList.getColumns().clear();
 			ArrayList<String> result = Database.select(Tabell.SELECT.TRENINGSØKT());
 			if (result.size() > 0) {
 				String[] firstSplit = result.get(0).split(",");
