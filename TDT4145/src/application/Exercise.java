@@ -9,16 +9,21 @@ public abstract class Exercise {
     protected int ovelsesID;
     protected String name;
     protected static String description;
+    protected static String group;
 
-    protected int temp; //outdoor exercise
-    protected String weather; //outdoor exercise
+    protected static int temp; //outdoor exercise
+    protected static String weather; //outdoor exercise
 
-    protected String ventilation; //indoor exercise
-    protected int spectators; //indoor exercise
+    protected static String ventilation; //indoor exercise
+    protected static int spectators; //indoor exercise
 
 
     public void setName(String name){
         this.name = name;
+    }
+    
+    public void setGroup(String group){
+    	this.group = group;
     }
 
     public void setDescription(String description){
@@ -57,20 +62,24 @@ public abstract class Exercise {
         this.ventilation = ventilation;
     }
 
-    public String getWeather() {
+    public static String getWeather() {
         return weather;
     }
 
-    public int getTemp() {
+    public static int getTemp() {
         return temp;
     }
 
-    public String getVentilation() {
+    public static String getVentilation() {
         return ventilation;
     }
 
-    public int getSpectators() {
+    public static int getSpectators() {
         return spectators;
+    }
+    
+    public static String getGroup(){
+    	return group;
     }
 
     public void setOutdoor(int temp, String weather){

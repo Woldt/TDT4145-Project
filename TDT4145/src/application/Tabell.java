@@ -40,17 +40,30 @@ public class Tabell {
 			return TODO + "Utholdenhet " + values(valueOf(øvelsesID), valueOf(lengdeKm), valueOf(minutter));
 		}
 		
-		public static String ØVELSE(String navn, String beskrivelse) {
-			return TODO + "Øvelse " + values("DEFAULT" , valueOf(navn), valueOf(beskrivelse));
+		public static String ØVELSE(String navn, String beskrivelse, String gruppe) {
+			return TODO + "Øvelse " + values("DEFAULT" , valueOf(navn), valueOf(beskrivelse), valueOf(gruppe));
 		}
 		public static String BESTÅR_AV(int treningsid, int øvelsesid) {
 			return TODO + "BestårAv " + values(valueOf(treningsid), valueOf(øvelsesid));
 		}
+		
+		public static String ERSTATTES_AV(int øvelsesid_en, int øvelsesid_to){
+			return TODO + "ErstattesAv" + values(valueOf(øvelsesid_en), valueOf(øvelsesid_to));
+		}
+		
 	}
 	
 	public static class SELECT {
 		
 		private static final String TODO = "SELECT * FROM ";
+		
+		public static String ERSTATTES_AV_INSERT(String group){
+			return "SELECT ØvelsesID, Navn FROM Øvelse WHERE Gruppe = '"+ group +"'"; 
+		}
+		
+		public static String ERSTATTES_AV(){
+			return "SELECT Navn FROM " + "ErstattesAv";
+		}
 		
 		public static String INNENDØRSØVELSE() {
 			return TODO + "Innendørsøvelse";
@@ -110,7 +123,4 @@ public class Tabell {
 		return statement.toString();
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(Tabell.INSERT.MÅL(5, "Hei", "Anal", 55));
-	}
 }

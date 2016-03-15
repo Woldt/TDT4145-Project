@@ -40,29 +40,13 @@ public class ExercisePromtBox {
 	
 		yes_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (newScene));
-			if(type.equals("Strength")){
-				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description ));
-				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Strength.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
-			}
-			else{
-				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description ));
-				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Endurance.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
-			}
-			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
+			insertAll(type, treningsID, øvelsesID);
 			window.close();
 		});	
 
 		no_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (homeScene));
-			if(type.equals("Strength")){
-				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description ));
-				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Strength.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
-			}
-			else{
-				Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description ));
-				Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Endurance.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
-			}
-			Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
+			insertAll(type, treningsID, øvelsesID);
 			window.close();
 
 		});
@@ -87,6 +71,47 @@ public class ExercisePromtBox {
 		window.setScene(scene);
 		window.showAndWait();
 
+	}
+
+	private static void insertAll(String type, ArrayList<String> treningsID, ArrayList<String> øvelsesID)throws NumberFormatException {
+		if(type.equals("Strength")){
+			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description, Strength.getGroup() ));
+			Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Strength.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
+			Database.insert(Tabell.INSERT.STYRKE_OG_KONDISJON(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Strength.getBelastning(), Strength.getRepetitions(), Strength.getSets()));
+			erstattesAVGruppeInnsetting(øvelsesID,'S');
+		}
+		else{ // Endurance
+			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description, Endurance.getGroup() ));
+			Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Endurance.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
+			Database.insert(Tabell.INSERT.UTHOLDENHET(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Endurance.getLength(), Endurance.getMinutes()));
+			erstattesAVGruppeInnsetting(øvelsesID,'E');
+
+		}
+		if(Workout.getWorkoutType().equals("Outside")){
+			Database.insert(Tabell.INSERT.UTENDØRSØVELSE(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, type.equals("Strength")? Strength.getTemp() : Endurance.getTemp(), type.equals("Strength")? Strength.getWeather() : Endurance.getWeather()));
+		}
+		else{ // Inside
+			Database.insert(Tabell.INSERT.INNENDØRSØVELSE(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, type.equals("Strength")? Strength.getVentilation() : Endurance.getVentilation(), type.equals("Strength")? Strength.getSpectators() : Endurance.getSpectators()));
+			
+		}
+		//Not workout type or exercise type specific
+		
+		Database.insert(Tabell.INSERT.BESTÅR_AV(Integer.valueOf(treningsID.get(0).split(";")[1]), Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
+	}
+
+	private static void erstattesAVGruppeInnsetting(ArrayList<String> øvelsesID, char ch) throws NumberFormatException {
+		String group;
+		if(ch == 'S'){
+			group = Strength.getGroup();
+		}
+		else{
+			group = Endurance.getGroup();
+		}
+		ArrayList<String> resultSet = Database.select(Tabell.SELECT.ERSTATTES_AV_INSERT(group));
+		for(String tuple : resultSet){
+			System.out.println(tuple);
+			Database.insert(Tabell.INSERT.ERSTATTES_AV(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Integer.valueOf(tuple.split(";")[0])));
+		}
 	}
 
 }

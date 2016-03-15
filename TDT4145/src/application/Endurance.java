@@ -6,8 +6,8 @@ package application;
  */
 public class Endurance extends Exercise {
 
-    private int length;
-    private int minutes;
+    private static int length;
+    private static int minutes;
 //
 //    public Endurance(int length, int minutes, boolean indoor){
 //        this.length = length;
@@ -42,11 +42,11 @@ public class Endurance extends Exercise {
     }
 
 // Get methods
-    public int getLength() {
+    public static int getLength() {
         return length;
     }
 
-    public int getMinutes() {
+    public static int getMinutes() {
         return minutes;
     }
     

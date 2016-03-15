@@ -183,7 +183,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise group not set.\n";
 				}
 				else{
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					this.strengthExercise.setGroup(groupField.getValue());
 				}
 				// Validate type specific 
 				if(Workout.getWorkoutType().equals("Inside")){
@@ -281,7 +281,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise group not set.\n";
 				}
 				else{
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					this.enduranceExercise.setGroup(groupField.getValue());
 				}
 		// Validate type specific 
 				if(Workout.getWorkoutType().equals("Inside")){

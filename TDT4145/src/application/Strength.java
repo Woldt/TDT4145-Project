@@ -6,9 +6,9 @@ package application;
  */
 public class Strength extends Exercise {
 
-    private int belastning;
-    private int repetitions;
-    private int sets;
+    private static int belastning;
+    private static int repetitions;
+    private static int sets;
 //
 //    public Strength(int belastning, int repetitions, int sets, boolean indoor){
 //        this.belastning = belastning;
@@ -46,15 +46,15 @@ public class Strength extends Exercise {
     }
 
 // Get methods
-    public int getRepetitions() {
+    public static int getRepetitions() {
         return repetitions;
     }
 
-    public int getBelastning() {
+    public static int getBelastning() {
         return belastning;
     }
 
-    public int getSets() {
+    public static int getSets() {
         return sets;
     }
 
