@@ -25,8 +25,8 @@
                   <TextField fx:id="workoutField" onTextChange="#titleFieldChange" onFocusedChange="#titleFieldFocusChange" layoutX="122.0" layoutY="57.0" prefHeight="25.0" prefWidth="257.0" promptText="Enter title here..." />
                   <DatePicker fx:id="dateField" onAction="#dateFieldChange" onFocusedChange="#dateFieldFocusChange" layoutX="122.0" layoutY="89.0" prefHeight="25.0" prefWidth="257.0" promptText="dd-mm-yy" />
                   <ComboBox fx:id="typeField" layoutX="418.0" layoutY="57.0" prefWidth="150.0" promptText="Workout type" />
-                  <ComboBox fx:id="minuteField" layoutX="258.0" layoutY="120.0" prefHeight="25.0" prefWidth="121.0" promptText="Minute" />
-                  <ComboBox fx:id="hourField" layoutX="122.0" layoutY="120.0" prefHeight="25.0" prefWidth="118.0" promptText="Hour" />
+                  <ComboBox fx:id="minuteField" onAction="#startMinChange" layoutX="258.0" layoutY="120.0" prefHeight="25.0" prefWidth="121.0" promptText="Minute" />
+                  <ComboBox fx:id="hourField" onAction="#startHourChange" layoutX="122.0" layoutY="120.0" prefHeight="25.0" prefWidth="118.0" promptText="Hour" />
                   <Label alignment="CENTER" layoutX="240.0" layoutY="119.0" prefHeight="27.0" prefWidth="19.0" text=":">
                      <font>
                         <Font name="System Bold" size="18.0" />
