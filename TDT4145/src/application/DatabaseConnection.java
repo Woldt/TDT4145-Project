@@ -85,7 +85,7 @@ public class DatabaseConnection {
 				StringBuilder row = new StringBuilder();
 				for (int i = 1; i <= meta.getColumnCount(); i ++) {
 					String label = meta.getColumnName(i);
-					row.append(label).append(":");
+					row.append(label).append(";");
 					row.append(rs.getString(label));
 					if (i != meta.getColumnCount()) {
 						row.append(",");

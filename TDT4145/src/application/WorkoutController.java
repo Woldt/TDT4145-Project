@@ -364,7 +364,7 @@ public class WorkoutController implements PropertyChangeListener {
 			if (result.size() > 0) {
 				String[] firstSplit = result.get(0).split(",");
 				for (int i = 0; i < result.get(0).split(",").length; i ++) {
-					final String kolonneNavn = firstSplit[i].split(":")[0];
+					final String kolonneNavn = firstSplit[i].split(";")[0];
 					TableColumn<List<String>,String> kolonne = new TableColumn<>(kolonneNavn);
 					final int colIndex = i;
 					kolonne.setCellValueFactory(data -> {
@@ -383,7 +383,7 @@ public class WorkoutController implements PropertyChangeListener {
 					String[] split = row.split(",");
 					ArrayList<String> verdier = new ArrayList<String>();
 					for (int i = 0; i < split.length; i ++) {
-						verdier.add(split[i].split(":")[1]);
+						verdier.add(split[i].split(";")[1]);
 					}
 					workoutList.getItems().add(verdier);
 				}
