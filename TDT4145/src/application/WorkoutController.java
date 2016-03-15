@@ -4,9 +4,11 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.io.IOException;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.util.ArrayList;
 
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -14,10 +16,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.util.converter.LocalTimeStringConverter;
-import javafx.event.ActionEvent;
+import javafx.scene.control.TreeTableColumn;
+import javafx.scene.control.TreeTableView;
 
 public class WorkoutController implements PropertyChangeListener {
 
@@ -330,8 +333,8 @@ public class WorkoutController implements PropertyChangeListener {
 				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 				String time = workout.getWorkoutHour() + ":" + workout.getWorkoutMinute();
 				
-				
-				Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote());
+				System.out.println(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
+				Database.insert(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
 				Main.primaryStage.setScene(new Scene(scene));
 			}
 			else {
@@ -341,6 +344,23 @@ public class WorkoutController implements PropertyChangeListener {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	@FXML private TreeTableView<String> workoutList;
+	
+	@FXML
+	private void loadWorkouts(Event event) {
+		if (((Tab) event.getTarget()).isSelected()) {
+			ArrayList<String> result = Database.select(Tabell.SELECT.TRENINGSØKT());
+			workoutList.getColumns().clear();
+			for (String row : result) {
+				String[] split = row.split(",");
+				for (int j = 0; j < split.length; j ++) {	
+					String[] secondSplit = split[j].split(":");
+//					workoutList.getColumns().add(new TreeTableColumn(secondSplit[0]));
+				}
+			}
 		}
 	}
 

@@ -1,6 +1,7 @@
 package application;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import resources.DatabaseCredentials;
 /**
@@ -71,27 +72,32 @@ public class DatabaseConnection {
 	/**
 	 * Method to handle the resultTabel generated from executeQuery(String query)
 	 */
-	public void ovelseToString(){
+	public ArrayList<String> select(String query){
+		
+		ArrayList<String> result = new ArrayList<String>();
+		
 		//STEP 5: Extract data from result set
 		try {	//Display or do something with values
 			stmt = conn.createStatement();
-			String query = "SELECT * FROM Øvelse"; 
-			rs = stmt.executeQuery(query);		
+			rs = stmt.executeQuery(query);
+			ResultSetMetaData meta = rs.getMetaData();
 			while(rs.next()){
-				//get attributes.
-				int ID = rs.getInt("ØvelsesID");
-				String name = rs.getString("Navn");
-				String desc = rs.getString("Beskrivelse");
-				
-				//Display tuple.
-				String tupel = "ID: " + ID + "\nName: " + name + "\nDescription: " + desc;
-				System.out.println(tupel);
+				StringBuilder row = new StringBuilder();
+				for (int i = 1; i <= meta.getColumnCount(); i ++) {
+					String label = meta.getColumnName(i);
+					row.append(label).append(":");
+					row.append(rs.getString(label));
+					if (i != meta.getColumnCount()) {
+						row.append(",");
+					}
+				}
+				result.add(row.toString());
 			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
-
+		return result;
 	}
 	
 	/**

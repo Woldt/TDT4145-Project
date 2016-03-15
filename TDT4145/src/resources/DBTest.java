@@ -1,5 +1,6 @@
 package resources;
 
+import application.Database;
 import application.DatabaseConnection;
 import application.Tabell;;
 
@@ -13,9 +14,8 @@ public class DBTest {
 	}
 	
 	void run(){
-		String insrt = Tabell.INSERT.INNENDØRSØVELSE(10, "bra", 11); 
-		conn.insert(insrt);
-		conn.ovelseToString();
+		System.out.println(Tabell.SELECT.INNENDØRSØVELSE());
+		System.out.println(conn.select(Tabell.SELECT.INNENDØRSØVELSE()));
 	}
 	
 	void exit(){
@@ -23,9 +23,6 @@ public class DBTest {
 	}
 	
 	public static void main(String[] args) {
-		DBTest dbt = new DBTest();
-		dbt.init();
-		dbt.run();
-		dbt.exit();
+		Database.insert("INSERT INTO Treningsøkt VALUES(DEFAULT, '2016-03-16', '10:45', 90, 3, 3, 'Jeg er glad')");
 	}
 }
