@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutController">
   <tabs>
     <Tab text="Create Workout">
       <content>
@@ -45,16 +45,16 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="workoutList" layoutX="6.0" layoutY="63.0" prefHeight="269.0" prefWidth="589.0">
+                  <TableView fx:id="workoutList" layoutX="6.0" layoutY="63.0" prefHeight="350.0" prefWidth="678.0">
                   </TableView>
-                  <Label alignment="CENTER" layoutX="217.0" layoutY="9.0" prefHeight="44.0" prefWidth="167.0" text="Workouts" underline="true">
+                  <Label alignment="CENTER" layoutX="262.0" layoutY="9.0" prefHeight="44.0" prefWidth="167.0" text="Workouts" underline="true">
                      <font>
                         <Font name="System Bold Italic" size="24.0" />
                      </font>
                   </Label>
-                  <Button disable="true" layoutX="504.0" layoutY="339.0" mnemonicParsing="false" text="Edit" />
-                  <Button disable="true" layoutX="553.0" layoutY="339.0" mnemonicParsing="false" text="Print" />
-                  <Button layoutX="6.0" layoutY="339.0" mnemonicParsing="false" text="Back" />
+                  <Button disable="true" layoutX="593.0" layoutY="429.0" mnemonicParsing="false" text="Edit" />
+                  <Button disable="true" layoutX="642.0" layoutY="429.0" mnemonicParsing="false" text="Print" />
+                  <Button layoutX="6.0" layoutY="429.0" mnemonicParsing="false" text="Back" />
                </children></AnchorPane>
       </content>
     </Tab>

@@ -38,7 +38,7 @@ public class DatabaseConnection {
 			Class.forName("com.mysql.jdbc.Driver").newInstance();
 
 			//STEP 3: Open a connection
-			System.out.println("Connecting to database...");
+//			System.out.println("Connecting to database...");
 			conn = DriverManager.getConnection(DB_URL,USER,PASS);
 		}
 		catch(SQLException se){
@@ -58,7 +58,7 @@ public class DatabaseConnection {
 	 */
 	public void insert(String query){
 		//STEP 4: Execute a query
-		System.out.println("Creating statement...");
+//		System.out.println("Creating statement...");
 		try {
 			stmt = conn.createStatement();
 			preparedStatement = conn.prepareStatement(query);

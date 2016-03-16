@@ -63,7 +63,7 @@ public class ExercisePromtBox {
 		//AlertBox main-layout: layout og putte knappene inn i.
 		BorderPane pane = new BorderPane();
 		pane.setTop(label);
-		pane.setAlignment(label, Pos.TOP_CENTER);
+		BorderPane.setAlignment(label, Pos.TOP_CENTER);
 		pane.setCenter(layout);
 
 
