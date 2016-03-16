@@ -109,8 +109,7 @@ public class ExercisePromtBox {
 		}
 		ArrayList<String> resultSet = Database.select(Tabell.SELECT.ERSTATTES_AV_INSERT(group));
 		for(String tuple : resultSet){
-			System.out.println(tuple);
-			Database.insert(Tabell.INSERT.ERSTATTES_AV(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Integer.valueOf(tuple.split(";")[0])));
+			Database.insert(Tabell.INSERT.ERSTATTES_AV(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Integer.valueOf(tuple.split(";")[1].split(",")[0])));
 		}
 	}
 
