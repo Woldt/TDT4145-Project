@@ -5,7 +5,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutController">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.WorkoutController">
   <tabs>
     <Tab text="Create Workout">
       <content>
@@ -45,7 +45,7 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="workoutList" layoutX="6.0" layoutY="63.0" prefHeight="350.0" prefWidth="678.0">
+                  <TableView fx:id="workoutList" layoutX="6.0" layoutY="55.0" prefHeight="358.0" prefWidth="690.0">
                   </TableView>
                   <Label alignment="CENTER" layoutX="262.0" layoutY="9.0" prefHeight="44.0" prefWidth="167.0" text="Workouts" underline="true">
                      <font>
