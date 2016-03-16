@@ -8,17 +8,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -28,7 +31,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeTableColumn;
 import javafx.scene.control.TreeTableView;
+import javafx.scene.control.TreeView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class WorkoutController implements PropertyChangeListener {
 
@@ -341,7 +349,7 @@ public class WorkoutController implements PropertyChangeListener {
 				scene = (Parent) fxmlLoader.load(this.getClass().getResourceAsStream("ExercisesGUI.fxml"));
 				String time = workout.getWorkoutHour() + ":" + workout.getWorkoutMinute();
 					
-				System.out.println(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
+//				System.out.println(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
 				Database.insert(Tabell.INSERT.TRENINGSØKT(workout.getWorkoutDate().toString(), time, workout.getWorkoutDurationTime(), workout.getPersonalFitness(), workout.getWorkoutAccomplishment(), workout.getWorkoutNote()));
 				Main.primaryStage.setScene(new Scene(scene));
 			}
@@ -360,8 +368,9 @@ public class WorkoutController implements PropertyChangeListener {
 	@FXML
 	private void loadWorkouts(Event event) {
 		if (((Tab) event.getTarget()).isSelected()) {
-			workoutList.getItems().clear();
+			workoutList.getSelectionModel().selectedItemProperty().removeListener(showOvelser);
 			workoutList.getColumns().clear();
+			workoutList.getItems().clear();
 			ArrayList<String> result = Database.select(Tabell.SELECT.TRENINGSØKT());
 			if (result.size() > 0) {
 				String[] firstSplit = result.get(0).split(",");
@@ -390,6 +399,146 @@ public class WorkoutController implements PropertyChangeListener {
 					workoutList.getItems().add(verdier);
 				}
 			}
+			workoutList.getSelectionModel().selectedItemProperty().addListener(showOvelser);
 		}
+	}
+	
+	private ChangeListener<List<String>> showOvelser = new ChangeListener<List<String>>() {
+
+		@Override
+		public void changed(ObservableValue<? extends List<String>> observable, List<String> oldValue, List<String> newValue) {
+			
+			BorderPane root = new BorderPane();
+			
+			
+			VBox iBox = new VBox(10);
+			VBox uBox = new VBox(10);
+			
+			
+			String query1 = "SELECT Øvelse.*,"
+							+ " Innendørsøvelse.Luftventilasjon, Innendørsøvelse.AntallTilskuere"
+							+ ", Utholdenhet.LengdeKM, Utholdenhet.Minutter"
+							+ " FROM Øvelse INNER JOIN BestårAv ON Øvelse.ØvelsesID = BestårAv.ØvelsesID AND BestårAv.TreningsID = " + newValue.get(0)
+							+ " INNER JOIN Innendørsøvelse ON Øvelse.ØvelsesID = Innendørsøvelse.ØvelsesID"
+							+ " INNER JOIN Utholdenhet ON Øvelse.ØvelsesID = Utholdenhet.ØvelsesID"
+							;
+			
+			String query2 = "SELECT Øvelse.*,"
+							+ " Innendørsøvelse.Luftventilasjon, Innendørsøvelse.AntallTilskuere"
+							+ ", StyrkeOgKondisjon.Belastning, StyrkeOgKondisjon.AntallRepetisjoner, StyrkeOgKondisjon.AntallSett"
+							+ " FROM Øvelse INNER JOIN BestårAv ON Øvelse.ØvelsesID = BestårAv.ØvelsesID AND BestårAv.TreningsID = " + newValue.get(0)
+							+ " INNER JOIN Innendørsøvelse ON Øvelse.ØvelsesID = Innendørsøvelse.ØvelsesID"
+							+ " INNER JOIN StyrkeOgKondisjon ON Øvelse.ØvelsesID = StyrkeOgKondisjon.ØvelsesID"
+							;
+			
+			String query3 = "SELECT Øvelse.*,"
+							+ " Utendørsøvelse.Temperatur, Utendørsøvelse.Værtype"
+							+ ", Utholdenhet.LengdeKM, Utholdenhet.Minutter"
+							+ " FROM Øvelse INNER JOIN BestårAv ON Øvelse.ØvelsesID = BestårAv.ØvelsesID AND BestårAv.TreningsID = " + newValue.get(0)
+							+ " INNER JOIN Utendørsøvelse ON Øvelse.ØvelsesID = Utendørsøvelse.ØvelsesID"
+							+ " INNER JOIN Utholdenhet ON Øvelse.ØvelsesID = Utholdenhet.ØvelsesID"
+							+ " GROUP BY Øvelse.ØvelsesID"
+							;
+			
+			String query4 = "SELECT Øvelse.*,"
+							+ " Utendørsøvelse.Temperatur, Utendørsøvelse.Værtype"
+							+ ", StyrkeOgKondisjon.Belastning, StyrkeOgKondisjon.AntallRepetisjoner, StyrkeOgKondisjon.AntallSett"
+							+ " FROM Øvelse INNER JOIN BestårAv ON Øvelse.ØvelsesID = BestårAv.ØvelsesID AND BestårAv.TreningsID = " + newValue.get(0)
+							+ " INNER JOIN Utendørsøvelse ON Øvelse.ØvelsesID = Utendørsøvelse.ØvelsesID"
+							+ " INNER JOIN StyrkeOgKondisjon ON Øvelse.ØvelsesID = StyrkeOgKondisjon.ØvelsesID"
+							;
+			
+			TableView<List<String>> q1 = createView(Database.select(query1));
+			TableView<List<String>> q2 = createView(Database.select(query2));
+			TableView<List<String>> q3 = createView(Database.select(query3));
+			TableView<List<String>> q4 = createView(Database.select(query4));
+			
+			if (q1 != null) {
+				root.setTop(new Label("Innendørsøvelser"));
+				iBox.getChildren().addAll(new Label("Utholdenhet"), q1);
+			}
+			if (q2 != null) {
+				root.setTop(new Label("Innendørsøvelser"));
+				iBox.getChildren().addAll(new Label("Styrke og kondisjon"), q2);
+			}
+			if (q3 != null) {
+				root.setTop(new Label("Utendørsøvelser"));
+				iBox.getChildren().addAll(new Label("Utholdenhet"), q3);
+			}
+			if (q4 != null) {
+				root.setTop(new Label("Utendørsøvelser"));
+				iBox.getChildren().addAll(new Label("Styrke og kondisjon"), q4);
+			}
+			
+			if (q1 == null && q2 == null && q3 == null && q4 == null) {
+				root.setCenter(new Label("Denne treningsøkten inneholder ingen øvelser"));
+				BorderPane.setAlignment(root.getCenter(), Pos.CENTER);
+				root.getCenter().setStyle("-fx-font-weight: bold");
+				root.setMinHeight(200);
+				root.setMinWidth(400);
+			}
+			else {				
+				root.setCenter(iBox);
+			}
+			
+			if (root.getTop() != null) {				
+				BorderPane.setAlignment(root.getTop(), Pos.CENTER);
+				root.getTop().setStyle("-fx-font-weight: bold");
+			}
+			
+			
+			
+			Stage resultStage = new Stage();
+			Scene resultScene = new Scene(root);
+			resultStage.setTitle("Øvinger i treningen");
+			resultStage.setScene(resultScene);
+			resultStage.show();
+			
+			resultStage.focusedProperty().addListener((e1, e2, e3) -> {
+				resultStage.close();
+			}); 
+		}
+	};
+	
+	private TableView<List<String>> createView(List<String> values) {
+		
+		if (values.size() == 0) {
+			return null;
+		}
+		
+		TableView<List<String>> root = new TableView<List<String>>();
+		
+		String[] firstSplit = values.get(0).split(",");
+		for (int i = 0; i < values.get(0).split(",").length; i ++) {
+			
+			final String kolonneNavn = firstSplit[i].split(";")[0];
+			TableColumn<List<String>,String> kolonne = new TableColumn<>(kolonneNavn);
+			final int colIndex = i;
+			
+			kolonne.setMinWidth(120);
+			kolonne.setMaxWidth(120);
+			
+			kolonne.setCellValueFactory(data -> {
+                List<String> rowValues = data.getValue();
+                String cellValue;
+                if (colIndex < rowValues.size()) {
+                    cellValue = rowValues.get(colIndex);
+                }
+                else {
+                     cellValue = "" ;
+                }
+                return new ReadOnlyStringWrapper(cellValue);
+            });
+			root.getColumns().add(kolonne);
+		}
+		for (String row : values) {
+			String[] split = row.split(",");
+			ArrayList<String> verdier = new ArrayList<String>();
+			for (int i = 0; i < split.length; i ++) {
+				verdier.add(split[i].split(";")[1]);
+			}
+			root.getItems().add(verdier);
+		}
+		return root;
 	}
 }
