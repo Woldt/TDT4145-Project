@@ -33,11 +33,11 @@ public class ExercisePromtBox {
 		ArrayList<String> treningsID = Database.select("Select count(*) from Treningsøkt;");
 		ArrayList<String> øvelsesID = Database.select("Select count(*) from Øvelse;");
 		
-		System.out.println(treningsID.get(0).toString());
-		System.out.println(øvelsesID.get(0).toString());
-	
-		System.out.println(treningsID.get(0).split(";")[1]);
-	
+//		System.out.println(treningsID.get(0).toString());
+//		System.out.println(øvelsesID.get(0).toString());
+//	
+//		System.out.println(treningsID.get(0).split(";")[1]);
+//	
 		yes_btn.setOnAction(e -> {
 			Main.primaryStage.setScene(new Scene (newScene));
 			insertAll(type, treningsID, øvelsesID);
@@ -109,7 +109,13 @@ public class ExercisePromtBox {
 		}
 		ArrayList<String> resultSet = Database.select(Tabell.SELECT.ERSTATTES_AV_INSERT(group));
 		for(String tuple : resultSet){
-			Database.insert(Tabell.INSERT.ERSTATTES_AV(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Integer.valueOf(tuple.split(";")[1].split(",")[0])));
+			String splitTuple = tuple.split(";")[1];
+			String split = splitTuple.split(",")[0];
+			String splitØvelse = øvelsesID.get(0).split(";")[1];
+			
+			if(Integer.valueOf(splitØvelse)+1 != Integer.valueOf(split)){
+				Database.insert(Tabell.INSERT.ERSTATTES_AV(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Integer.valueOf(tuple.split(";")[1].split(",")[0])));				
+			}
 		}
 	}
 

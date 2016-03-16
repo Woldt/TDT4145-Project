@@ -48,7 +48,7 @@ public class Tabell {
 		}
 		
 		public static String ERSTATTES_AV(int øvelsesid_en, int øvelsesid_to){
-			return TODO + "ErstattesAv" + values(valueOf(øvelsesid_en), valueOf(øvelsesid_to));
+			return TODO + "ErstattesAv " + values(valueOf(øvelsesid_en), valueOf(øvelsesid_to));
 		}
 		
 	}
@@ -58,7 +58,7 @@ public class Tabell {
 		private static final String TODO = "SELECT * FROM ";
 		
 		public static String ERSTATTES_AV_INSERT(String group){
-			return "SELECT ØvelsesID, Navn FROM Øvelse WHERE Gruppe = '"+ group +"'"; 
+			return "SELECT ØvelsesID, Navn FROM Øvelse WHERE Gruppe = " + valueOf(group) + ";"; 
 		}
 		
 		public static String ERSTATTES_AV(){
