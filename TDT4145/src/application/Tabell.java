@@ -25,7 +25,7 @@ public class Tabell {
 		}
 		
 		public static String STYRKE_OG_KONDISJON(int øvelsesID, int belastning, int antallRep, int antallSett) {
-			return TODO + "Styrke og kondisjon " + values(valueOf(øvelsesID), valueOf(belastning), valueOf(antallRep), valueOf(antallSett));
+			return TODO + "StyrkeOgKondisjon " + values(valueOf(øvelsesID), valueOf(belastning), valueOf(antallRep), valueOf(antallSett));
 		}
 		
 		public static String TRENINGSØKT(String dato, String tidspunkt, int varighet, int personligForm, int prestasjon, String notat) {
@@ -78,7 +78,7 @@ public class Tabell {
 		}
 		
 		public static String STYRKE_OG_KONDISJON() {
-			return TODO + "Styrke og kondisjon";
+			return TODO + "StyrkeOgKondisjon";
 		}
 		
 		public static String TRENINGSØKT() {

@@ -175,7 +175,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise goal not filled in.\n";
 				}
 				else{
-					//how do we handle the goal of each exercise? do we need a new class/ entity class Goal?
+					this.strengthExercise.setGoal(goalField.getText());
 				}
 				// Validate group/category
 				if(groupField.getValue()== null){
@@ -224,7 +224,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise repetitions not set.\n";
 				}
 				else{
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					this.strengthExercise.setRepetitions(Integer.valueOf(repsField.getText()));
 				}
 				// Validate sets
 				if(setsField.getText().equals("")){
@@ -232,7 +232,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise sets not set.\n";	
 				}
 				else {
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					this.strengthExercise.setSets(Integer.valueOf(setsField.getText()));
 				}
 				// Validate Weight
 				if(weightField.getText().equals("")){
@@ -240,7 +240,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise weigth not set.\n";
 				}
 				else{
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
+					this.strengthExercise.setBelastning(Integer.valueOf(weightField.getText()));
 				}
 				// Validate Length
 				//No need to validate or set, because Strength exercises do not need length.
@@ -273,7 +273,7 @@ public class ExcercisesController  implements PropertyChangeListener {
 					message += "Exercise goal not filled in.\n";
 				}
 				else{
-					//how do we handle the goal of each exercise? do we need a new class/ entity class Goal?
+					this.enduranceExercise.setGoal(goalField.getText());
 				}
 		// Validate group/category
 				if(groupField.getValue()== null){
@@ -315,30 +315,6 @@ public class ExcercisesController  implements PropertyChangeListener {
 					else{
 						this.enduranceExercise.setWeather(specTwoField.getValue());
 					}
-				}
-		// Validate reps
-				if(repsField.getText().equals("")){
-					state = false;
-					message += "Exercise repetitions not set.\n";
-				}
-				else{
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
-				}
-		// Validate sets
-				if(setsField.getText().equals("")){
-					state = false;
-					message += "Exercise sets not set.\n";	
-				}
-				else {
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
-				}
-		// Validate Weight
-				if(weightField.getText().equals("")){
-					state = false;
-					message += "Exercise weigth not set.\n";
-				}
-				else{
-					//how do we handle this relation to other exercises of same group? should it be only the exercises within same workout with same group that should be grouped?
 				}
 		// Validate Length
 				if(lenghtField.getText().equals("")){
