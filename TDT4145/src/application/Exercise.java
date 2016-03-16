@@ -10,6 +10,7 @@ public abstract class Exercise {
     protected String name;
     protected static String description;
     protected static String group;
+    protected static String goal;
 
     protected static int temp; //outdoor exercise
     protected static String weather; //outdoor exercise
@@ -24,6 +25,10 @@ public abstract class Exercise {
     
     public void setGroup(String group){
     	this.group = group;
+    }
+
+    public void setGoal(String goal){
+    	this.goal = goal;
     }
 
     public void setDescription(String description){
@@ -80,6 +85,10 @@ public abstract class Exercise {
     
     public static String getGroup(){
     	return group;
+    }
+    
+    public static String getGoal(){
+    	return goal;
     }
 
     public void setOutdoor(int temp, String weather){
