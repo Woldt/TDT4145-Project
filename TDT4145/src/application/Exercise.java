@@ -7,7 +7,7 @@ package application;
 public abstract class Exercise {
 
     protected int ovelsesID;
-    protected String name;
+    protected static String name;
     protected static String description;
     protected static String group;
     protected static String goal;
@@ -47,7 +47,7 @@ public abstract class Exercise {
         return description;
     }
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
