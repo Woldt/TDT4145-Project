@@ -75,13 +75,13 @@ public class ExercisePromtBox {
 
 	private static void insertAll(String type, ArrayList<String> treningsID, ArrayList<String> øvelsesID)throws NumberFormatException {
 		if(type.equals("Strength")){
-			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Strength.description, Strength.getGroup() ));
+			Database.insert(Tabell.INSERT.ØVELSE(Strength.getName(),Strength.description, Strength.getGroup() ));
 			Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Strength.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			Database.insert(Tabell.INSERT.STYRKE_OG_KONDISJON(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Strength.getBelastning(), Strength.getRepetitions(), Strength.getSets()));
 			erstattesAVGruppeInnsetting(øvelsesID,'S');
 		}
 		else{ // Endurance
-			Database.insert(Tabell.INSERT.ØVELSE(Workout.getWorkoutTitle(),Endurance.description, Endurance.getGroup() ));
+			Database.insert(Tabell.INSERT.ØVELSE(Endurance.getName(),Endurance.description, Endurance.getGroup() ));
 			Database.insert(Tabell.INSERT.MÅL(Workout.getWorkoutDate().toString(), Endurance.description, Integer.valueOf(øvelsesID.get(0).split(";")[1])+1));
 			Database.insert(Tabell.INSERT.UTHOLDENHET(Integer.valueOf(øvelsesID.get(0).split(";")[1])+1, Endurance.getLength(), Endurance.getMinutes()));
 			erstattesAVGruppeInnsetting(øvelsesID,'E');
